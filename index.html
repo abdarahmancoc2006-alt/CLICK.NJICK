@@ -78,10 +78,10 @@ body {
 }
 .item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
 
-/* --- PAYMENT MENU (RESTORED TO DETAILED VERSION) --- */
+/* --- PAYMENT MENU --- */
 .pay-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
 
-/* --- EXPLORE (RESTORED) --- */
+/* --- EXPLORE --- */
 .explore { margin-top: 80px; padding: 70px 20px; background: #0b1a2a; }
 .explore-group { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
 .pill-btn { padding: 14px 26px; border-radius: 30px; background: white; color: #0b1a2a; border: none; font-weight: 600; cursor: pointer; }
@@ -113,22 +113,41 @@ body {
 </div>
 
 <div id="paymentOverlay" class="overlay hidden">
-  <div class="modal-content">
+  <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
     <h2 style="margin-top:0; color:var(--blue);">Checkout / Paiement</h2>
-    <label>Nom du titulaire</label>
-    <input type="text" class="pay-input" placeholder="Ahmed Benali">
-    <label>Numéro de carte</label>
-    <input type="text" class="pay-input" placeholder="1234 5678 9101 1121">
+    
+    <label><b>Informations Personnelles</b></label>
+    <div style="display:flex; gap:10px;">
+        <input type="text" class="pay-input" placeholder="Email">
+        <input type="text" class="pay-input" placeholder="Téléphone">
+    </div>
+    
+    <label><b>Adresse de Livraison</b></label>
+    <input type="text" class="pay-input" placeholder="Quartier, N° d'Appartement, Rue">
+    
+    <label><b>Détails de Paiement</b></label>
+    <input type="text" class="pay-input" placeholder="Nom du titulaire">
+    <input type="text" class="pay-input" placeholder="Numéro de carte (16 chiffres)">
     <div style="display:flex; gap:10px;">
         <input type="text" class="pay-input" placeholder="MM/YY">
         <input type="text" class="pay-input" placeholder="CVV">
     </div>
-    <label>Choisir votre Banque</label>
+    
+    <label><b>Choisir votre Banque</b></label>
     <select class="pay-input">
         <option>CIH Bank</option>
         <option>Attijariwafa Bank</option>
         <option>Banque Populaire</option>
+        <option>BMCE Bank</option>
+        <option>Crédit Agricole</option>
     </select>
+
+    <label><b>Mode de Livraison</b></label>
+    <select class="pay-input">
+        <option>Livraison Standard (30-45 min)</option>
+        <option>Livraison Prioritaire (+10 MAD)</option>
+    </select>
+
     <button class="main-btn" style="width:100%; margin-top:15px;" onclick="alert('Transaction Réussie!')">Payer <span id="payTotal">0</span> MAD</button>
     <button onclick="closeOverlay('paymentOverlay')" style="display:block; margin:10px auto; color:red; border:none; background:none; cursor:pointer;">Annuler</button>
   </div>
@@ -144,20 +163,30 @@ body {
 </div>
 
 <div id="faqOverlay" class="overlay hidden">
-  <div class="modal-content">
-    <h2 style="color:var(--blue);">FAQ</h2>
-    <p><strong>Délai ?</strong> 30 à 45 minutes.</p>
-    <p><strong>Annulation ?</strong> Possible avant préparation.</p>
-    <button class="main-btn" onclick="closeOverlay('faqOverlay')">Fermer</button>
+  <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+    <h2 style="color:var(--blue);">Questions Fréquentes (FAQ)</h2>
+    <p><b>1. Comment suivre ma commande ?</b><br>Dès que vous validez votre panier, un livreur est automatiquement assigné. Vous pouvez voir l'état de préparation en temps réel via l'onglet commande.</p>
+    <hr>
+    <p><b>2. Quels sont les délais moyens de livraison ?</b><br>En moyenne, nos livreurs déposent votre repas en 30 à 45 minutes. En cas de forte pluie ou de trafic dense, un délai de 15 minutes supplémentaire peut être appliqué.</p>
+    <hr>
+    <p><b>3. Puis-je annuler ma commande ?</b><br>L'annulation est gratuite tant que le restaurant n'a pas commencé la préparation de vos plats (environ 3 minutes après validation).</p>
+    <hr>
+    <p><b>4. Quels modes de paiement acceptez-vous ?</b><br>Nous acceptons toutes les cartes bancaires marocaines (CIH, Attijari, etc.) ainsi que le paiement en espèces à la livraison.</p>
+    <hr>
+    <p><b>5. Ma commande est arrivée froide, que faire ?</b><br>Contactez immédiatement notre support WhatsApp avec une photo. Nous procéderons à un remboursement ou à un nouvel envoi gratuit.</p>
+    <button class="main-btn" style="width:100%; margin-top:10px;" onclick="closeOverlay('faqOverlay')">Fermer</button>
   </div>
 </div>
 
 <div id="aideOverlay" class="overlay hidden">
   <div class="modal-content">
-    <h2 style="color:var(--blue);">Centre d'Aide</h2>
-    <p>Problème de paiement ? Contactez votre banque.</p>
-    <p>Commande non reçue ? Contactez le support WhatsApp.</p>
-    <button class="main-btn" onclick="closeOverlay('aideOverlay')">Retour</button>
+    <h2 style="color:var(--blue);">Centre d'Aide & Assistance</h2>
+    <p><b>Besoin d'aide avec votre paiement ?</b><br>Assurez-vous que votre carte est activée pour les paiements en ligne (E-commerce). Si l'erreur persiste, essayez de changer de banque dans le menu déroulant ou choisissez le paiement à la livraison.</p>
+    <hr>
+    <p><b>Problème avec l'application ?</b><br>Si les menus ne s'affichent pas correctement, essayez de rafraîchir la page ou videz le cache de votre navigateur.</p>
+    <hr>
+    <p><b>Partenariats ?</b><br>Vous êtes un restaurateur et souhaitez rejoindre CLICK.NJIK ? Envoyez-nous un message via le support client.</p>
+    <button class="main-btn" style="width:100%; margin-top:20px;" onclick="closeOverlay('aideOverlay')">Retour</button>
   </div>
 </div>
 
