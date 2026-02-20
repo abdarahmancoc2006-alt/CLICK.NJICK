@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CLICK.NJIK | Delivery</title>
+<title>CLICK.NJIK | Delivery Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -22,121 +22,98 @@ body {
   overflow-x: hidden;
 }
 
-/* LANDING PAGE STYLES */
+/* LANDING PAGE */
 #landingPage {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   background: radial-gradient(circle at center, #1c3d63, #050c16);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: opacity 0.6s ease, visibility 0.6s;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000; transition: opacity 0.6s ease, visibility 0.6s;
 }
 
 .landing-content {
-  max-width: 650px;
-  padding: 50px 30px;
+  max-width: 650px; padding: 50px 30px;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 30px;
-  backdrop-filter: blur(15px);
+  border-radius: 30px; backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 140, 26, 0.3);
 }
 
 .discover-btn {
-  padding: 16px 50px;
-  font-size: 22px;
+  padding: 16px 50px; font-size: 20px;
   background: linear-gradient(135deg, var(--orange), #ffb347);
-  color: #1a1a1a;
-  border: none;
-  border-radius: 50px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 25px rgba(255, 140, 26, 0.5);
-  transition: 0.3s;
+  color: #1a1a1a; border: none; border-radius: 50px;
+  font-weight: bold; cursor: pointer; transition: 0.3s;
 }
 
 /* HEADER */
 header { padding: 50px 20px 20px; }
 .logo-box {
-  width: 120px; height: 120px; margin: auto;
+  width: 150px; height: 150px; margin: auto;
   background: linear-gradient(145deg, #1c3d63, #0a1b2f);
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 0 20px rgba(255,140,26,0.3);
+  box-shadow: 0 0 25px rgba(255,140,26,0.4);
 }
-.logo-box img { width: 80px; height: 80px; border-radius: 50%; }
+.logo-box img { width: 100px; height: 100px; border-radius: 50%; }
 
 /* RESTAURANT SELECTOR */
 .restaurant-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 0 20px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px; max-width: 1000px; margin: 30px auto; padding: 0 20px;
 }
 
 .brand-btn {
-  padding: 20px 10px;
-  border-radius: 15px;
+  padding: 25px 10px; border-radius: 15px;
   border: 2px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  background: rgba(255,255,255,0.05); color: white;
+  font-weight: bold; cursor: pointer; transition: 0.3s;
 }
 
-.brand-btn:hover {
-  background: var(--orange);
-  color: #1a1a1a;
-  transform: translateY(-5px);
-}
-
-.brand-btn i { font-style: normal; font-size: 24px; }
+.brand-btn:hover { background: var(--orange); color: #1a1a1a; transform: scale(1.05); }
 
 /* MENU BOX */
 .menu-box {
-  max-width: 600px;
-  margin: 20px auto;
-  background: white;
-  color: #333;
-  padding: 25px;
-  border-radius: 20px;
-  display: none;
-  animation: fadeIn 0.4s ease;
+  max-width: 750px; margin: 25px auto;
+  background: #f9f9f9; color: #222;
+  padding: 30px; border-radius: 20px; display: none;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.menu-section { margin-bottom: 30px; text-align: left; }
+.menu-section h3 { 
+    color: var(--blue); border-left: 5px solid var(--orange); 
+    padding-left: 10px; margin-bottom: 15px;
 }
 
-.menu-box h2 { color: var(--blue); margin-top: 0; border-bottom: 2px solid var(--orange); padding-bottom: 10px;}
-
-.menu-item {
-  display: flex; justify-content: space-between;
-  padding: 12px 0; border-bottom: 1px solid #eee;
-  text-align: left;
+.item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid #ddd;
 }
 
 .order-btn {
-  background: var(--orange); border: none; padding: 5px 15px;
-  border-radius: 15px; font-weight: bold; cursor: pointer;
+  background: var(--orange); border: none; padding: 8px 18px;
+  border-radius: 20px; font-weight: bold; cursor: pointer;
 }
 
-/* EXPLORE & FOOTER (Kept from original) */
-.explore { margin-top: 50px; padding: 40px 20px; background: #0b1a2a; }
-.explore-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-.pill-btn { padding: 10px 20px; border-radius: 20px; border: none; cursor: pointer; }
-.big-footer { background: #050c16; padding: 40px; font-size: 14px; }
+/* EXPLORE SECTION */
+.explore { margin-top: 80px; padding: 70px 20px; background: #0b1a2a; }
+.explore-group { 
+    max-width: 1000px; margin: auto; display: flex; 
+    flex-wrap: wrap; justify-content: center; gap: 15px; 
+}
+.pill-btn {
+  padding: 14px 26px; border-radius: 30px; background: white;
+  color: #0b1a2a; border: none; font-weight: 600; cursor: pointer;
+}
+
+/* FOOTER */
+.big-footer { background: #050c16; padding: 60px 30px; }
+.footer-grid {
+  max-width: 1100px; margin: auto; display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;
+}
+.footer-btn { 
+    display: block; background: none; border: none; color: white; 
+    opacity: 0.8; margin: 6px 0; cursor: pointer; 
+}
 </style>
 </head>
 
@@ -145,7 +122,7 @@ header { padding: 50px 20px 20px; }
 <div id="landingPage">
   <div class="landing-content">
     <h1>CLICK.NJIK</h1>
-    <p>La plateforme ultime pour commander chez vos enseignes préférées. KFC, McDonald's, Starbucks et plus encore, livrés chez vous en un clic.</p>
+    <p>Découvrez vos marques préférées livrées à votre porte. Choisissez McDonald's, KFC, Starbucks et plus encore en quelques secondes.</p>
     <button class="discover-btn" onclick="startApp()">Découvrir</button>
   </div>
 </div>
@@ -154,136 +131,163 @@ header { padding: 50px 20px 20px; }
   <div class="logo-box">
     <img src="logo.png" alt="CLICK.NJIK">
   </div>
-  <p>Choisissez votre restaurant préféré</p>
+  <p>Qualité • Livraison • Rapidité</p>
 </header>
 
 <div class="restaurant-grid">
-  <button class="brand-btn" onclick="showMenu('kfc')"><i>🍗</i>KFC</button>
-  <button class="brand-btn" onclick="showMenu('mcdonalds')"><i>🍔</i>McDonald's</button>
-  <button class="brand-btn" onclick="showMenu('starbucks')"><i>☕</i>Starbucks</button>
-  <button class="brand-btn" onclick="showMenu('burgerking')"><i>👑</i>Burger King</button>
-  <button class="brand-btn" onclick="showMenu('tacobell')"><i>🌮</i>Taco Bell</button>
-  <button class="brand-btn" onclick="showMenu('wendys')"><i>🥩</i>Wendy's</button>
+  <button class="brand-btn" onclick="showMenu('kfc')">🍗 KFC</button>
+  <button class="brand-btn" onclick="showMenu('mcdonalds')">🍔 McDonald's</button>
+  <button class="brand-btn" onclick="showMenu('starbucks')">☕ Starbucks</button>
+  <button class="brand-btn" onclick="showMenu('burgerking')">👑 Burger King</button>
+  <button class="brand-btn" onclick="showMenu('tacobell')">🌮 Taco Bell</button>
+  <button class="brand-btn" onclick="showMenu('wendys')">🥩 Wendy's</button>
 </div>
 
 <div id="menuDisplay" class="menu-box">
-  <h2 id="restaurantName">Menu</h2>
-  <div id="menuItems">
-    </div>
-  <button class="discover-btn" style="margin-top:20px; font-size:14px; padding:10px 20px;" onclick="closeMenu()">Retour aux restaurants</button>
+  <h2 id="resTitle" style="color:var(--blue); margin-top:0;">Menu</h2>
+  
+  <div class="menu-section">
+    <h3>🍔 Food Selection</h3>
+    <div id="foodItems"></div>
+  </div>
+
+  <div class="menu-section">
+    <h3>🥤 Drinks & Sides</h3>
+    <div id="drinkItems"></div>
+  </div>
+
+  <button class="discover-btn" style="padding:10px 30px; font-size:16px;" onclick="document.getElementById('menuDisplay').style.display='none'">Fermer le menu</button>
 </div>
 
 <section class="explore">
-  <h2>Explore Plus</h2>
+  <h2>Explore CLICK.NJIK</h2>
   <div class="explore-group">
+    <button class="pill-btn">🍔 Fast Food</button>
+    <button class="pill-btn">🍕 Pizza</button>
+    <button class="pill-btn">🥤 Drinks</button>
+    <button class="pill-btn">🌯 Tacos</button>
+    <button class="pill-btn">🍟 Snacks</button>
     <button class="pill-btn">🔥 Promotions</button>
-    <button class="pill-btn">⭐ Favoris</button>
-    <button class="pill-btn">📍 Proche de vous</button>
-    <button class="pill-btn">🚚 Suivi commande</button>
+    <button class="pill-btn">⭐ Best Sellers</button>
+    <button class="pill-btn">📍 Near You</button>
+    <button class="pill-btn">🕒 Open Now</button>
+    <button class="pill-btn">🚚 Delivery</button>
   </div>
 </section>
 
 <footer class="big-footer">
-  <div class="footer-legal">© 2026 CLICK.NJIK — School Project</div>
+  <div class="footer-grid">
+    <div class="footer-box">
+      <h4>Liens utiles</h4>
+      <button class="footer-btn">Accueil</button>
+      <button class="footer-btn">Menu</button>
+      <button class="footer-btn">Commander</button>
+      <button class="footer-btn">Contact</button>
+    </div>
+    <div class="footer-box">
+      <h4>Nous suivre</h4>
+      <button class="footer-btn">Instagram</button>
+      <button class="footer-btn">Facebook</button>
+      <button class="footer-btn">TikTok</button>
+    </div>
+    <div class="footer-box">
+      <h4>Aide</h4>
+      <button class="footer-btn">FAQ</button>
+      <button class="footer-btn">Support</button>
+      <button class="footer-btn">Conditions</button>
+    </div>
+  </div>
+  <div style="margin-top:40px; opacity:0.5; font-size:13px;">© 2026 CLICK.NJIK — All rights reserved</div>
 </footer>
 
 <script>
-// Data for different menus
-const restaurantData = {
+const data = {
   kfc: {
-    name: "KFC Menu",
-    items: [
-      { name: "Bucket 12 Wings", price: "95 MAD" },
-      { name: "Zinger Burger", price: "45 MAD" },
-      { name: "Popcorn Chicken", price: "30 MAD" },
-      { name: "Pepsi Large", price: "15 MAD" }
+    name: "KFC Special Menu",
+    food: [
+        {n: "Bucket 15 Wings", p: "120 MAD"}, {n: "Zinger Burger", p: "45 MAD"}, 
+        {n: "Tower Burger", p: "50 MAD"}, {n: "6pc Hot & Crispy", p: "85 MAD"}
+    ],
+    drinks: [
+        {n: "Pepsi", p: "12 MAD"}, {n: "Mirinda Orange", p: "12 MAD"}, 
+        {n: "Coleslaw Medium", p: "15 MAD"}, {n: "Large Fries", p: "20 MAD"}
     ]
   },
   mcdonalds: {
     name: "McDonald's Menu",
-    items: [
-      { name: "Big Mac Meal", price: "65 MAD" },
-      { name: "Chicken McNuggets (9pcs)", price: "40 MAD" },
-      { name: "Happy Meal", price: "35 MAD" },
-      { name: "McFlurry Oreo", price: "25 MAD" }
+    food: [
+        {n: "Big Mac", p: "48 MAD"}, {n: "Grand Deluxe", p: "60 MAD"}, 
+        {n: "Chicken McNuggets 9pc", p: "38 MAD"}, {n: "Royal Cheese", p: "45 MAD"}
+    ],
+    drinks: [
+        {n: "Coca-Cola", p: "12 MAD"}, {n: "McFlurry Oreo", p: "28 MAD"}, 
+        {n: "Apple Pie", p: "18 MAD"}, {n: "Orange Juice", p: "15 MAD"}
     ]
   },
   starbucks: {
-    name: "Starbucks Menu",
-    items: [
-      { name: "Caramel Macchiato", price: "38 MAD" },
-      { name: "Java Chip Frappuccino", price: "45 MAD" },
-      { name: "Caffè Latte", price: "32 MAD" },
-      { name: "Chocolate Muffin", price: "28 MAD" }
+    name: "Starbucks Coffee & Sweets",
+    food: [
+        {n: "Caramel Muffin", p: "25 MAD"}, {n: "Cheese Sandwich", p: "35 MAD"}, 
+        {n: "Chocolate Cookie", p: "22 MAD"}, {n: "Croissant", p: "20 MAD"}
+    ],
+    drinks: [
+        {n: "Caramel Macchiato", p: "42 MAD"}, {n: "Iced Latte", p: "38 MAD"}, 
+        {n: "Java Chip Frappuccino", p: "48 MAD"}, {n: "Cold Brew", p: "35 MAD"}
     ]
   },
   burgerking: {
-    name: "Burger King Menu",
-    items: [
-      { name: "Whopper Burger", price: "55 MAD" },
-      { name: "Steakhouse Burger", price: "70 MAD" },
-      { name: "Onion Rings (8pcs)", price: "22 MAD" },
-      { name: "King Shake Strawberry", price: "30 MAD" }
+    name: "Burger King | Home of the Whopper",
+    food: [
+        {n: "Whopper", p: "55 MAD"}, {n: "Steakhouse Burger", p: "68 MAD"}, 
+        {n: "Long Chicken", p: "45 MAD"}, {n: "Double Cheese", p: "40 MAD"}
+    ],
+    drinks: [
+        {n: "7Up", p: "12 MAD"}, {n: "Onion Rings 8pc", p: "22 MAD"}, 
+        {n: "King Shake", p: "30 MAD"}, {n: "Fries Large", p: "20 MAD"}
     ]
   },
   tacobell: {
-    name: "Taco Bell Menu",
-    items: [
-      { name: "Crunchy Taco Supreme", price: "25 MAD" },
-      { name: "Burrito 5-Layer", price: "45 MAD" },
-      { name: "Quesadilla Chicken", price: "50 MAD" },
-      { name: "Nachos Cheese", price: "28 MAD" }
+    name: "Taco Bell Mexican Style",
+    food: [
+        {n: "Crunchy Taco Supreme", p: "25 MAD"}, {n: "Chicken Quesadilla", p: "48 MAD"}, 
+        {n: "Beef Burrito", p: "45 MAD"}, {n: "Naked Chicken Chalupa", p: "52 MAD"}
+    ],
+    drinks: [
+        {n: "Mountain Dew", p: "15 MAD"}, {n: "Nachos Cheese", p: "28 MAD"}, 
+        {n: "Cinnamon Twists", p: "15 MAD"}, {n: "Iced Tea", p: "12 MAD"}
     ]
   },
   wendys: {
-    name: "Wendy's Menu",
-    items: [
-      { name: "Baconator", price: "75 MAD" },
-      { name: "Dave's Single", price: "50 MAD" },
-      { name: "Frosty Chocolate", price: "20 MAD" },
-      { name: "Spicy Chicken Nuggets", price: "35 MAD" }
+    name: "Wendy's Quality Burger",
+    food: [
+        {n: "Baconator", p: "75 MAD"}, {n: "Dave's Single", p: "50 MAD"}, 
+        {n: "Spicy Chicken Sandwich", p: "55 MAD"}, {n: "4pc Nuggets", p: "25 MAD"}
+    ],
+    drinks: [
+        {n: "Chocolate Frosty", p: "20 MAD"}, {n: "Vanilla Frosty", p: "20 MAD"}, 
+        {n: "Dr Pepper", p: "15 MAD"}, {n: "Baked Potato", p: "30 MAD"}
     ]
   }
 };
 
 function startApp() {
-  const landing = document.getElementById("landingPage");
-  landing.style.opacity = "0";
-  setTimeout(() => { landing.style.visibility = "hidden"; }, 600);
+  document.getElementById("landingPage").style.opacity = "0";
+  setTimeout(() => { document.getElementById("landingPage").style.visibility = "hidden"; }, 600);
 }
 
-function showMenu(brandId) {
-  const data = restaurantData[brandId];
-  const menuDisplay = document.getElementById("menuDisplay");
-  const menuItems = document.getElementById("menuItems");
-  const restaurantName = document.getElementById("restaurantName");
-
-  // Set the title
-  restaurantName.innerText = data.name;
-
-  // Clear old items and add new ones
-  menuItems.innerHTML = "";
-  data.items.forEach(item => {
-    menuItems.innerHTML += `
-      <div class="menu-item">
-        <div><strong>${item.name}</strong><br><small>${item.price}</small></div>
-        <button class="order-btn" onclick="alert('Ajouté au panier!')">Commander</button>
-      </div>
-    `;
-  });
-
-  // Show the box
-  menuDisplay.style.display = "block";
-  window.scrollTo({ top: menuDisplay.offsetTop - 50, behavior: 'smooth' });
-}
-
-function closeMenu() {
-  document.getElementById("menuDisplay").style.display = "none";
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function showMenu(brand) {
+  const res = data[brand];
+  document.getElementById("resTitle").innerText = res.name;
+  
+  const foodHtml = res.food.map(i => `<div class="item"><span>${i.n}<br><small>${i.p}</small></span><button class="order-btn">Order</button></div>`).join('');
+  const drinkHtml = res.drinks.map(i => `<div class="item"><span>${i.n}<br><small>${i.p}</small></span><button class="order-btn">Order</button></div>`).join('');
+  
+  document.getElementById("foodItems").innerHTML = foodHtml;
+  document.getElementById("drinkItems").innerHTML = drinkHtml;
+  document.getElementById("menuDisplay").style.display = "block";
+  window.scrollTo({ top: document.getElementById('menuDisplay').offsetTop - 20, behavior: 'smooth' });
 }
 </script>
 
-</body>
-</html>
 </body>
 </html>
