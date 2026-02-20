@@ -81,10 +81,11 @@ body {
 /* --- PAYMENT MENU --- */
 .pay-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
 
-/* --- EXPLORE --- */
+/* --- EXPLORE SECTION --- */
 .explore { margin-top: 80px; padding: 70px 20px; background: #0b1a2a; }
 .explore-group { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-.pill-btn { padding: 14px 26px; border-radius: 30px; background: white; color: #0b1a2a; border: none; font-weight: 600; cursor: pointer; }
+.pill-btn { padding: 14px 26px; border-radius: 30px; background: white; color: #0b1a2a; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; }
+.pill-btn:hover { background: var(--orange); transform: translateY(-3px); }
 
 /* --- FOOTER --- */
 .big-footer { background: #050c16; padding: 60px 30px; }
@@ -115,16 +116,13 @@ body {
 <div id="paymentOverlay" class="overlay hidden">
   <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
     <h2 style="margin-top:0; color:var(--blue);">Checkout / Paiement</h2>
-    
     <label><b>Informations Personnelles</b></label>
     <div style="display:flex; gap:10px;">
         <input type="text" class="pay-input" placeholder="Email">
         <input type="text" class="pay-input" placeholder="Téléphone">
     </div>
-    
     <label><b>Adresse de Livraison</b></label>
     <input type="text" class="pay-input" placeholder="Quartier, N° d'Appartement, Rue">
-    
     <label><b>Détails de Paiement</b></label>
     <input type="text" class="pay-input" placeholder="Nom du titulaire">
     <input type="text" class="pay-input" placeholder="Numéro de carte (16 chiffres)">
@@ -132,22 +130,12 @@ body {
         <input type="text" class="pay-input" placeholder="MM/YY">
         <input type="text" class="pay-input" placeholder="CVV">
     </div>
-    
     <label><b>Choisir votre Banque</b></label>
     <select class="pay-input">
         <option>CIH Bank</option>
         <option>Attijariwafa Bank</option>
         <option>Banque Populaire</option>
-        <option>BMCE Bank</option>
-        <option>Crédit Agricole</option>
     </select>
-
-    <label><b>Mode de Livraison</b></label>
-    <select class="pay-input">
-        <option>Livraison Standard (30-45 min)</option>
-        <option>Livraison Prioritaire (+10 MAD)</option>
-    </select>
-
     <button class="main-btn" style="width:100%; margin-top:15px;" onclick="alert('Transaction Réussie!')">Payer <span id="payTotal">0</span> MAD</button>
     <button onclick="closeOverlay('paymentOverlay')" style="display:block; margin:10px auto; color:red; border:none; background:none; cursor:pointer;">Annuler</button>
   </div>
@@ -165,15 +153,8 @@ body {
 <div id="faqOverlay" class="overlay hidden">
   <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
     <h2 style="color:var(--blue);">Questions Fréquentes (FAQ)</h2>
-    <p><b>1. Comment suivre ma commande ?</b><br>Dès que vous validez votre panier, un livreur est automatiquement assigné. Vous pouvez voir l'état de préparation en temps réel via l'onglet commande.</p>
-    <hr>
-    <p><b>2. Quels sont les délais moyens de livraison ?</b><br>En moyenne, nos livreurs déposent votre repas en 30 à 45 minutes. En cas de forte pluie ou de trafic dense, un délai de 15 minutes supplémentaire peut être appliqué.</p>
-    <hr>
-    <p><b>3. Puis-je annuler ma commande ?</b><br>L'annulation est gratuite tant que le restaurant n'a pas commencé la préparation de vos plats (environ 3 minutes après validation).</p>
-    <hr>
-    <p><b>4. Quels modes de paiement acceptez-vous ?</b><br>Nous acceptons toutes les cartes bancaires marocaines (CIH, Attijari, etc.) ainsi que le paiement en espèces à la livraison.</p>
-    <hr>
-    <p><b>5. Ma commande est arrivée froide, que faire ?</b><br>Contactez immédiatement notre support WhatsApp avec une photo. Nous procéderons à un remboursement ou à un nouvel envoi gratuit.</p>
+    <p><b>1. Comment suivre ma commande ?</b><br>Dès que vous validez votre panier, un livreur est automatiquement assigné.</p>
+    <p><b>2. Quels sont les délais ?</b><br>En moyenne 30 à 45 minutes.</p>
     <button class="main-btn" style="width:100%; margin-top:10px;" onclick="closeOverlay('faqOverlay')">Fermer</button>
   </div>
 </div>
@@ -181,21 +162,17 @@ body {
 <div id="aideOverlay" class="overlay hidden">
   <div class="modal-content">
     <h2 style="color:var(--blue);">Centre d'Aide & Assistance</h2>
-    <p><b>Besoin d'aide avec votre paiement ?</b><br>Assurez-vous que votre carte est activée pour les paiements en ligne (E-commerce). Si l'erreur persiste, essayez de changer de banque dans le menu déroulant ou choisissez le paiement à la livraison.</p>
-    <hr>
-    <p><b>Problème avec l'application ?</b><br>Si les menus ne s'affichent pas correctement, essayez de rafraîchir la page ou videz le cache de votre navigateur.</p>
-    <hr>
-    <p><b>Partenariats ?</b><br>Vous êtes un restaurateur et souhaitez rejoindre CLICK.NJIK ? Envoyez-nous un message via le support client.</p>
+    <p>Besoin d'aide ? Contactez le support WhatsApp pour une aide immédiate.</p>
     <button class="main-btn" style="width:100%; margin-top:20px;" onclick="closeOverlay('aideOverlay')">Retour</button>
   </div>
 </div>
 
-<header>
+<header id="header">
   <div class="logo-box"><img src="logo.png" alt="CLICK.NJIK"></div>
   <p>Qualité • Livraison • Rapidité</p>
 </header>
 
-<div class="restaurant-grid">
+<div class="restaurant-grid" id="mainMenu">
   <button class="brand-btn" onclick="showMenu('kfc')">🍗 KFC</button>
   <button class="brand-btn" onclick="showMenu('mcdonalds')">🍔 McDonald's</button>
   <button class="brand-btn" onclick="showMenu('starbucks')">☕ Starbucks</button>
@@ -215,20 +192,23 @@ body {
 
 <div id="cartArea" style="max-width:800px; margin:40px auto; padding:30px; background:rgba(255,255,255,0.05); border-radius:20px; border:1px solid var(--orange);">
     <h3>📋 Votre Panier</h3>
-    <div id="liveCartItems" style="text-align:left; margin-bottom:20px;">
-        <p style="text-align:center; opacity:0.5;">Le panier est vide</p>
-    </div>
+    <div id="liveCartItems" style="text-align:left; margin-bottom:20px;"><p style="text-align:center; opacity:0.5;">Le panier est vide</p></div>
     <hr>
     <h3>Total: <span id="cartTotal">0</span> MAD</h3>
     <button class="main-btn" style="width:100%;" onclick="openPayment()">Payer</button>
 </div>
 
 <section class="explore">
+  <h2 style="color:var(--orange); margin-bottom:30px; font-size: 32px;">Explore ClickNjik</h2>
   <div class="explore-group">
-    <button class="pill-btn">🍔 Fast Food</button> <button class="pill-btn">🍕 Pizza</button>
-    <button class="pill-btn">🥤 Drinks</button> <button class="pill-btn">🌯 Tacos</button>
-    <button class="pill-btn">🍟 Snacks</button> <button class="pill-btn">🔥 Promotions</button>
-    <button class="pill-btn">⭐ Best Sellers</button> <button class="pill-btn">📍 Near You</button>
+    <button class="pill-btn" onclick="showMenu('mcdonalds')">🍔 Fast Food</button> 
+    <button class="pill-btn" onclick="alert('Searching for Pizza restaurants near you...')">🍕 Pizza</button>
+    <button class="pill-btn" onclick="showMenu('starbucks')">🥤 Drinks</button> 
+    <button class="pill-btn" onclick="showMenu('tacobell')">🌯 Tacos</button>
+    <button class="pill-btn" onclick="showMenu('kfc')">🍟 Snacks</button> 
+    <button class="pill-btn" onclick="alert('Flash Promo: 20% OFF on Burger King!')">🔥 Promotions</button>
+    <button class="pill-btn" onclick="showMenu('burgerking')">⭐ Best Sellers</button> 
+    <button class="pill-btn" onclick="window.scrollTo(0,0)">📍 Near You</button>
   </div>
 </section>
 
@@ -257,30 +237,12 @@ body {
 <script>
 let cart = [];
 const data = {
-  kfc: { 
-    food: [{n:"Bucket 15pc",p:120},{n:"Zinger",p:45},{n:"Tower",p:52},{n:"Wings 6pc",p:40},{n:"Colonel",p:42},{n:"Boxmaster",p:58},{n:"Twister",p:38},{n:"Crispy",p:45}],
-    drinks: [{n:"Pepsi",p:12},{n:"7Up",p:12},{n:"Mirinda",p:12},{n:"Water",p:6},{n:"Iced Tea",p:15}]
-  },
-  mcdonalds: { 
-    food: [{n:"Big Mac",p:48},{n:"Grand Deluxe",p:65},{n:"Nuggets 9pc",p:42},{n:"McChicken",p:40},{n:"Big Tasty",p:70},{n:"Royal Cheese",p:55},{n:"Happy Meal",p:35},{n:"Filet-O-Fish",p:38}],
-    drinks: [{n:"Coke",p:12},{n:"Fanta",p:12},{n:"McFlurry",p:30},{n:"Sundae",p:20},{n:"Orange Juice",p:15}]
-  },
-  starbucks: { 
-    food: [{n:"Muffin Choco",p:25},{n:"Cheese Panini",p:48},{n:"Cookie",p:22},{n:"Brownie",p:28},{n:"Croissant",p:20},{n:"Tuna Sandwich",p:45},{n:"Bagel",p:30},{n:"Blueberry Cake",p:32}],
-    drinks: [{n:"Caramel Macchiato",p:45},{n:"Latte",p:35},{n:"Java Chip",p:50},{n:"Cold Brew",p:38},{n:"Frappuccino",p:52}]
-  },
-  burgerking: { 
-    food: [{n:"Whopper",p:55},{n:"Steakhouse",p:72},{n:"Big King",p:48},{n:"Long Chicken",p:45},{n:"Crispy",p:42},{n:"Bacon Burger",p:60},{n:"Nuggets 10pc",p:35},{n:"Double Cheese",p:40}],
-    drinks: [{n:"Coke",p:12},{n:"Onion Rings",p:25},{n:"King Fusion",p:30},{n:"Shake",p:32},{n:"Sprite",p:12}]
-  },
-  tacobell: { 
-    food: [{n:"Crunchy Taco",p:25},{n:"Quesadilla",p:50},{n:"Burrito",p:45},{n:"Chalupa",p:52},{n:"Nachos",p:60},{n:"Soft Taco",p:28},{n:"Enchirito",p:42},{n:"Cheesy Melt",p:35}],
-    drinks: [{n:"Mt Dew",p:15},{n:"Baja Blast",p:18},{n:"Tea",p:12},{n:"Cinnamon",p:18},{n:"Soda",p:12}]
-  },
-  wendys: { 
-    food: [{n:"Baconator",p:78},{n:"Dave Single",p:50},{n:"Spicy Chicken",p:55},{n:"Nuggets",p:42},{n:"Potato",p:30},{n:"Chili",p:28},{n:"Junior Burger",p:32},{n:"Double Bacon",p:65}],
-    drinks: [{n:"Frosty Choco",p:25},{n:"Frosty Van",p:25},{n:"Dr Pepper",p:15},{n:"Fries",p:20},{n:"Root Beer",p:15}]
-  }
+  kfc: { food: [{n:"Bucket 15pc",p:120},{n:"Zinger",p:45},{n:"Tower",p:52},{n:"Wings 6pc",p:40},{n:"Colonel",p:42},{n:"Boxmaster",p:58},{n:"Twister",p:38},{n:"Crispy",p:45}], drinks: [{n:"Pepsi",p:12},{n:"7Up",p:12},{n:"Mirinda",p:12},{n:"Water",p:6},{n:"Iced Tea",p:15}] },
+  mcdonalds: { food: [{n:"Big Mac",p:48},{n:"Grand Deluxe",p:65},{n:"Nuggets 9pc",p:42},{n:"McChicken",p:40},{n:"Big Tasty",p:70},{n:"Royal Cheese",p:55},{n:"Happy Meal",p:35},{n:"Filet-O-Fish",p:38}], drinks: [{n:"Coke",p:12},{n:"Fanta",p:12},{n:"McFlurry",p:30},{n:"Sundae",p:20},{n:"Orange Juice",p:15}] },
+  starbucks: { food: [{n:"Muffin Choco",p:25},{n:"Cheese Panini",p:48},{n:"Cookie",p:22},{n:"Brownie",p:28},{n:"Croissant",p:20},{n:"Tuna Sandwich",p:45},{n:"Bagel",p:30},{n:"Blueberry Cake",p:32}], drinks: [{n:"Caramel Macchiato",p:45},{n:"Latte",p:35},{n:"Java Chip",p:50},{n:"Cold Brew",p:38},{n:"Frappuccino",p:52}] },
+  burgerking: { food: [{n:"Whopper",p:55},{n:"Steakhouse",p:72},{n:"Big King",p:48},{n:"Long Chicken",p:45},{n:"Crispy",p:42},{n:"Bacon Burger",p:60},{n:"Nuggets 10pc",p:35},{n:"Double Cheese",p:40}], drinks: [{n:"Coke",p:12},{n:"Onion Rings",p:25},{n:"King Fusion",p:30},{n:"Shake",p:32},{n:"Sprite",p:12}] },
+  tacobell: { food: [{n:"Crunchy Taco",p:25},{n:"Quesadilla",p:50},{n:"Burrito",p:45},{n:"Chalupa",p:52},{n:"Nachos",p:60},{n:"Soft Taco",p:28},{n:"Enchirito",p:42},{n:"Cheesy Melt",p:35}], drinks: [{n:"Mt Dew",p:15},{n:"Baja Blast",p:18},{n:"Tea",p:12},{n:"Cinnamon",p:18},{n:"Soda",p:12}] },
+  wendys: { food: [{n:"Baconator",p:78},{n:"Dave Single",p:50},{n:"Spicy Chicken",p:55},{n:"Nuggets",p:42},{n:"Potato",p:30},{n:"Chili",p:28},{n:"Junior Burger",p:32},{n:"Double Bacon",p:65}], drinks: [{n:"Frosty Choco",p:25},{n:"Frosty Van",p:25},{n:"Dr Pepper",p:15},{n:"Fries",p:20},{n:"Root Beer",p:15}] }
 };
 
 function openOverlay(id) { document.getElementById(id).classList.remove('hidden'); }
@@ -295,16 +257,12 @@ function showMenu(brand) {
   window.scrollTo(0, document.getElementById('menuDisplay').offsetTop - 50);
 }
 
-function addToCart(n, p) {
-  cart.push({n, p});
-  updateCartUI();
-}
+function addToCart(n, p) { cart.push({n, p}); updateCartUI(); }
 
 function updateCartUI() {
   const list = document.getElementById("liveCartItems");
   if(cart.length === 0) list.innerHTML = "<p style='text-align:center; opacity:0.5;'>Le panier est vide</p>";
   else list.innerHTML = cart.map((i, idx) => `<div class="item">${i.n} - ${i.p} MAD <button onclick="removeItem(${idx})" style="color:red; background:none; border:none; cursor:pointer;">X</button></div>`).join('');
-  
   const total = cart.reduce((sum, i) => sum + i.p, 0);
   document.getElementById("cartTotal").innerText = total;
   document.getElementById("payTotal").innerText = total;
@@ -319,10 +277,7 @@ function showCommanderList() {
   openOverlay('orderListOverlay');
 }
 
-function openPayment() {
-  if(cart.length === 0) alert("Panier vide!");
-  else openOverlay('paymentOverlay');
-}
+function openPayment() { if(cart.length === 0) alert("Panier vide!"); else openOverlay('paymentOverlay'); }
 </script>
 
 </body>
