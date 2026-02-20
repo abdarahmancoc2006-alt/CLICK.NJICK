@@ -23,35 +23,48 @@
       max-width: 80%;
     }
 
-    section {
-      padding: 30px;
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+      flex-wrap: wrap;
     }
 
-    .menu {
-      max-width: 400px;
-      margin: auto;
+    .main-btn {
+      padding: 15px 40px;
+      font-size: 18px;
+      background: #ff8c1a;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      min-width: 180px;
+    }
+
+    .menu-box {
+      max-width: 450px;
+      margin: 20px auto;
       background: white;
       color: black;
       padding: 20px;
       border-radius: 10px;
+      display: none;
+      text-align: left;
+    }
+
+    .menu-box h3 {
+      text-align: center;
+      margin-top: 0;
     }
 
     .item {
       display: flex;
       justify-content: space-between;
-      margin: 12px 0;
-      font-weight: bold;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 12px 25px;
-      background: #ff8c1a;
-      color: black;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
+      margin: 10px 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
     }
 
     footer {
@@ -66,25 +79,63 @@
 <body>
 
 <header>
-  <!-- LOGO -->
   <img src="logo.png" alt="CLICK.NJIK Logo">
   <p>Fast food • Delivery • Quality</p>
 </header>
 
-<section>
-  <h2>Menu</h2>
-  <div class="menu">
-    <div class="item"><span>Burger</span><span>35 MAD</span></div>
-    <div class="item"><span>Pizza</span><span>45 MAD</span></div>
-    <div class="item"><span>Fries</span><span>15 MAD</span></div>
-    <div class="item"><span>Soft Drink</span><span>10 MAD</span></div>
-    <button>Order Now</button>
-  </div>
-</section>
+<!-- BUTTONS -->
+<div class="buttons">
+  <button class="main-btn" onclick="toggleMenu('foodMenu')">🍔 Food</button>
+  <button class="main-btn" onclick="toggleMenu('drinkMenu')">🥤 Drinks</button>
+</div>
+
+<!-- FOOD MENU -->
+<div id="foodMenu" class="menu-box">
+  <h3>Food Menu</h3>
+  <div class="item"><span>Classic Burger</span><span>35 MAD</span></div>
+  <div class="item"><span>Cheese Burger</span><span>38 MAD</span></div>
+  <div class="item"><span>Double Burger</span><span>45 MAD</span></div>
+  <div class="item"><span>Chicken Burger</span><span>40 MAD</span></div>
+  <div class="item"><span>Pizza Margherita</span><span>45 MAD</span></div>
+  <div class="item"><span>Pizza Chicken</span><span>50 MAD</span></div>
+  <div class="item"><span>Panini Chicken</span><span>30 MAD</span></div>
+  <div class="item"><span>Panini Meat</span><span>35 MAD</span></div>
+  <div class="item"><span>Fries (Small)</span><span>15 MAD</span></div>
+  <div class="item"><span>Fries (Large)</span><span>20 MAD</span></div>
+  <div class="item"><span>Nuggets (6 pcs)</span><span>25 MAD</span></div>
+</div>
+
+<!-- DRINKS MENU -->
+<div id="drinkMenu" class="menu-box">
+  <h3>Drinks Menu</h3>
+  <div class="item"><span>Coca-Cola</span><span>10 MAD</span></div>
+  <div class="item"><span>Sprite</span><span>10 MAD</span></div>
+  <div class="item"><span>Fanta</span><span>10 MAD</span></div>
+  <div class="item"><span>Water</span><span>5 MAD</span></div>
+  <div class="item"><span>Orange Juice</span><span>12 MAD</span></div>
+  <div class="item"><span>Lemon Juice</span><span>12 MAD</span></div>
+  <div class="item"><span>Milkshake Vanilla</span><span>18 MAD</span></div>
+  <div class="item"><span>Milkshake Chocolate</span><span>18 MAD</span></div>
+</div>
 
 <footer>
   © 2026 CLICK.NJIK — All rights reserved
 </footer>
+
+<script>
+  function toggleMenu(menuId) {
+    const food = document.getElementById("foodMenu");
+    const drinks = document.getElementById("drinkMenu");
+
+    if (menuId === "foodMenu") {
+      food.style.display = food.style.display === "block" ? "none" : "block";
+      drinks.style.display = "none";
+    } else {
+      drinks.style.display = drinks.style.display === "block" ? "none" : "block";
+      food.style.display = "none";
+    }
+  }
+</script>
 
 </body>
 </html>
