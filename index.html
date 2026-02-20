@@ -18,6 +18,65 @@ body {
   background: radial-gradient(circle at top, #122a45, #08121f);
   color: white;
   text-align: center;
+  overflow-x: hidden;
+}
+
+/* LANDING PAGE STYLES */
+#landingPage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #1c3d63, #050c16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+
+.landing-content {
+  max-width: 650px;
+  padding: 50px 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 30px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 140, 26, 0.3);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.landing-content h1 {
+  font-size: 48px;
+  color: var(--orange);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.landing-content p {
+  font-size: 19px;
+  line-height: 1.8;
+  margin-bottom: 35px;
+  color: #e0e0e0;
+}
+
+.discover-btn {
+  padding: 16px 50px;
+  font-size: 22px;
+  background: linear-gradient(135deg, var(--orange), #ffb347);
+  color: #1a1a1a;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(255, 140, 26, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.discover-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(255, 140, 26, 0.7);
 }
 
 /* HEADER */
@@ -205,6 +264,14 @@ header p {
 
 <body>
 
+<div id="landingPage">
+  <div class="landing-content">
+    <h1>CLICK.NJIK</h1>
+    <p>Bienvenue chez l'expert de la livraison rapide. Nous connectons vos envies aux meilleurs saveurs locales. Qualité, rapidité et fraîcheur garanties à chaque commande.</p>
+    <button class="discover-btn" onclick="startApp()">Découvrir</button>
+  </div>
+</div>
+
 <header>
   <div class="logo-box">
     <img src="logo.png" alt="CLICK.NJIK">
@@ -218,7 +285,6 @@ header p {
   <button class="main-btn" onclick="toggleCustom()">✨ Customize Your Order</button>
 </div>
 
-<!-- FOOD MENU -->
 <div id="foodMenu" class="menu-box">
   <h3>Food Menu</h3>
   <div class="item"><div class="item-info">Classic Burger<br><span class="price">35 MAD</span></div><button class="order-btn">Order</button></div>
@@ -235,7 +301,6 @@ header p {
   <div class="item"><div class="item-info">Large Fries<br><span class="price">20 MAD</span></div><button class="order-btn">Order</button></div>
 </div>
 
-<!-- DRINK MENU -->
 <div id="drinkMenu" class="menu-box">
   <h3>Drinks Menu</h3>
   <div class="item"><div class="item-info">Coca-Cola<br><span class="price">10 MAD</span></div><button class="order-btn">Order</button></div>
@@ -246,13 +311,11 @@ header p {
   <div class="item"><div class="item-info">Milkshake Vanilla<br><span class="price">18 MAD</span></div><button class="order-btn">Order</button></div>
 </div>
 
-<!-- CUSTOM ORDER -->
 <div id="customBox" class="custom-box">
   <input id="customInput" type="text" placeholder="Type your custom order and press Enter">
   <div id="successMsg" class="success-msg">Order is sent</div>
 </div>
 
-<!-- EXPLORE -->
 <section class="explore">
   <h2>Explore CLICK.NJIK</h2>
   <div class="explore-group">
@@ -269,7 +332,6 @@ header p {
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="big-footer">
   <div class="footer-grid">
     <div class="footer-box">
@@ -301,6 +363,13 @@ header p {
 </footer>
 
 <script>
+// Function to hide the landing page
+function startApp() {
+  const landing = document.getElementById("landingPage");
+  landing.style.opacity = "0";
+  landing.style.visibility = "hidden";
+}
+
 function toggleMenu(menuId) {
   document.getElementById("foodMenu").style.display = menuId === "foodMenu" ? "block" : "none";
   document.getElementById("drinkMenu").style.display = menuId === "drinkMenu" ? "block" : "none";
