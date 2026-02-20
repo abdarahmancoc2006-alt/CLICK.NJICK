@@ -26,7 +26,7 @@ header {
   padding: 50px 20px 30px;
 }
 
-/* ===== LOGO BADGE ===== */
+/* ===== LOGO ===== */
 .logo-box {
   width: 200px;
   height: 200px;
@@ -48,13 +48,6 @@ header {
   object-fit: cover;
   padding: 10px;
   background: radial-gradient(circle, #1c3d63, #0a1b2f);
-  box-shadow: inset 0 0 12px rgba(255,255,255,0.15);
-}
-
-header p {
-  margin-top: 20px;
-  font-size: 16px;
-  opacity: 0.85;
 }
 
 /* ===== BUTTONS ===== */
@@ -75,7 +68,6 @@ header p {
   border-radius: 50px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(255,140,26,0.4);
 }
 
 /* ===== MENU ===== */
@@ -89,24 +81,61 @@ header p {
   display: none;
 }
 
-.menu-box h3 {
-  color: var(--blue);
-}
-
 .item {
   display: flex;
   justify-content: space-between;
   margin: 12px 0;
-  padding-bottom: 6px;
   border-bottom: 1px dashed #ccc;
+}
+
+/* ===== NEW EXPLORE SECTION ===== */
+.explore {
+  margin-top: 80px;
+  padding: 60px 20px;
+  background: linear-gradient(180deg, #0b1a2a, #07101c);
+}
+
+.explore h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.explore p {
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+.explore-group {
+  max-width: 900px;
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.pill-btn {
+  padding: 12px 22px;
+  border-radius: 30px;
+  background: #ffffff;
+  color: #0b1a2a;
+  border: none;
+  font-size: 15px;
   font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pill-btn:hover {
+  background: var(--orange);
+  transform: translateY(-3px);
 }
 
 /* ===== BIG FOOTER ===== */
 .big-footer {
-  background: #0a0a0a;
+  background: #050c16;
   padding: 60px 30px 30px;
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
 .footer-grid {
@@ -120,26 +149,13 @@ header p {
 
 .footer-col h4 {
   margin-bottom: 15px;
-  font-size: 18px;
 }
 
 .footer-col p {
   margin: 8px 0;
   opacity: 0.8;
-  font-size: 14px;
 }
 
-.app-btn {
-  display: inline-block;
-  margin: 8px 0;
-  padding: 10px 16px;
-  border: 1px solid #555;
-  border-radius: 8px;
-  font-size: 13px;
-  opacity: 0.9;
-}
-
-/* ===== LEGAL ===== */
 .footer-legal {
   border-top: 1px solid #222;
   margin-top: 40px;
@@ -165,63 +181,67 @@ header p {
 </div>
 
 <div id="foodMenu" class="menu-box">
-  <h3>Food Menu</h3>
   <div class="item"><span>Classic Burger</span><span>35 MAD</span></div>
-  <div class="item"><span>Cheese Burger</span><span>38 MAD</span></div>
   <div class="item"><span>Pizza Chicken</span><span>50 MAD</span></div>
 </div>
 
 <div id="drinkMenu" class="menu-box">
-  <h3>Drinks Menu</h3>
   <div class="item"><span>Coca-Cola</span><span>10 MAD</span></div>
   <div class="item"><span>Milkshake</span><span>18 MAD</span></div>
 </div>
 
-<!-- ===== GLOVO STYLE FOOTER ===== -->
+<!-- ✅ NEW SECTION ADDED -->
+<section class="explore">
+  <h2>Explore CLICK.NJIK</h2>
+  <p>Popular cities & categories</p>
+
+  <div class="explore-group">
+    <button class="pill-btn">Casablanca</button>
+    <button class="pill-btn">Rabat</button>
+    <button class="pill-btn">Marrakech</button>
+    <button class="pill-btn">Tanger</button>
+    <button class="pill-btn">Agadir</button>
+  </div>
+
+  <div class="explore-group">
+    <button class="pill-btn">🍕 Pizza</button>
+    <button class="pill-btn">🍔 Burgers</button>
+    <button class="pill-btn">🥘 Marocain</button>
+    <button class="pill-btn">☕ Breakfast</button>
+    <button class="pill-btn">💊 Parapharmacie</button>
+  </div>
+</section>
+
 <footer class="big-footer">
   <div class="footer-grid">
-
     <div class="footer-col">
       <h4>Opportunités</h4>
       <p>Emploi</p>
       <p>Partenaires</p>
-      <p>Coursiers</p>
-      <p>CLICK Business</p>
     </div>
-
     <div class="footer-col">
       <h4>Liens utiles</h4>
-      <p>À propos</p>
       <p>FAQ</p>
-      <p>Blog</p>
       <p>Contact</p>
-      <p>Sécurité</p>
     </div>
-
     <div class="footer-col">
-      <h4>Nous suivre</h4>
+      <h4>Suivez-nous</h4>
       <p>Instagram</p>
       <p>TikTok</p>
-      <div class="app-btn"> App Store</div><br>
-      <div class="app-btn">▶ Google Play</div>
     </div>
-
   </div>
 
   <div class="footer-legal">
-    Conditions d’utilisation • Politique de confidentialité • Cookies • Accessibilité  
-    <br><br>
-    © 2026 CLICK.NJIK
+    © 2026 CLICK.NJIK — All rights reserved
   </div>
 </footer>
 
 <script>
 function toggleMenu(menuId) {
-  const food = document.getElementById("foodMenu");
-  const drinks = document.getElementById("drinkMenu");
-
-  food.style.display = menuId === "foodMenu" ? "block" : "none";
-  drinks.style.display = menuId === "drinkMenu" ? "block" : "none";
+  document.getElementById("foodMenu").style.display =
+    menuId === "foodMenu" ? "block" : "none";
+  document.getElementById("drinkMenu").style.display =
+    menuId === "drinkMenu" ? "block" : "none";
 }
 </script>
 
