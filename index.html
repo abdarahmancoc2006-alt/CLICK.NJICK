@@ -186,7 +186,7 @@ body {
     <p><b>Commande non reçue ?</b> Contactez le 06 31 60 61 11 via WhatsApp.</p>
     <hr>
     <p><b>Remboursement ?</b> Sous 48h après validation du support.</p>
-    <button class="main-btn" style="width:100%;" onclick="closeOverlay('aideOverlay')">Retour</button>
+    <button class="main-btn" onclick="closeOverlay('aideOverlay')">Retour</button>
   </div>
 </div>
 
@@ -331,13 +331,16 @@ function updateCartUI() {
 function removeItem(idx) { cart.splice(idx, 1); updateCartUI(); }
 
 function showCommanderList() {
-  if(cart.length === 0) { alert("Votre panier est vide!"); return; }
+  if(cart.length === 0) { 
+      alert("Votre Panier est vide !! Choisir un repas"); 
+      return; 
+  }
   const list = document.getElementById("orderListItems");
   list.innerHTML = cart.map(i => `<div class="item"><span>${i.n}</span><span>${i.p} MAD</span></div>`).join('');
   openOverlay('orderListOverlay');
 }
 
-function openPayment() { if(cart.length === 0) alert("Panier Vide!"); else openOverlay('paymentOverlay'); }
+function openPayment() { if(cart.length === 0) alert("Votre Panier est vide !! Choisir un repas"); else openOverlay('paymentOverlay'); }
 </script>
 
 </body>
