@@ -20,6 +20,7 @@ body {
   text-align: center;
 }
 
+/* HEADER */
 header {
   padding: 50px 20px 30px;
 }
@@ -41,10 +42,16 @@ header {
   height: 135px;
   border-radius: 50%;
   object-fit: cover;
+  background: #0a1b2f;
   padding: 10px;
-  background: radial-gradient(circle, #1c3d63, #0a1b2f);
 }
 
+header p {
+  margin-top: 20px;
+  opacity: 0.85;
+}
+
+/* MAIN BUTTONS */
 .buttons {
   display: flex;
   justify-content: center;
@@ -54,7 +61,7 @@ header {
 }
 
 .main-btn {
-  padding: 14px 35px;
+  padding: 14px 36px;
   font-size: 17px;
   background: linear-gradient(135deg, var(--orange), #ffb347);
   color: #1a1a1a;
@@ -64,9 +71,10 @@ header {
   cursor: pointer;
 }
 
+/* MENUS */
 .menu-box {
   max-width: 750px;
-  margin: 20px auto;
+  margin: 25px auto;
   background: linear-gradient(180deg, #ffffff, #f1f1f1);
   color: #222;
   padding: 25px;
@@ -84,8 +92,8 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 14px 0;
-  border-bottom: 1px dashed #ccc;
   padding-bottom: 8px;
+  border-bottom: 1px dashed #ccc;
 }
 
 .item-info {
@@ -113,9 +121,9 @@ header {
 }
 
 .custom-box input {
-  padding: 10px;
+  padding: 12px;
   width: 280px;
-  border-radius: 20px;
+  border-radius: 25px;
   border: none;
   outline: none;
   text-align: center;
@@ -128,7 +136,7 @@ header {
   display: none;
 }
 
-/* EXPLORE */
+/* EXPLORE SECTION */
 .explore {
   margin-top: 80px;
   padding: 70px 20px;
@@ -137,11 +145,12 @@ header {
 
 .explore h2 {
   font-size: 36px;
+  margin-bottom: 30px;
 }
 
 .explore-group {
   max-width: 1000px;
-  margin: 30px auto;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -165,7 +174,7 @@ header {
 }
 
 .footer-grid {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -178,11 +187,11 @@ header {
 
 .footer-btn {
   display: block;
-  margin: 6px auto;
   background: none;
   border: none;
   color: white;
   opacity: 0.85;
+  margin: 6px 0;
   cursor: pointer;
 }
 
@@ -209,10 +218,9 @@ header {
   <button class="main-btn" onclick="toggleCustom()">✨ Customize Your Order</button>
 </div>
 
-<!-- FOOD MENU (12 OPTIONS) -->
+<!-- FOOD MENU -->
 <div id="foodMenu" class="menu-box">
   <h3>Food Menu</h3>
-
   <div class="item"><div class="item-info">Classic Burger<br><span class="price">35 MAD</span></div><button class="order-btn">Order</button></div>
   <div class="item"><div class="item-info">Cheese Burger<br><span class="price">38 MAD</span></div><button class="order-btn">Order</button></div>
   <div class="item"><div class="item-info">Double Burger<br><span class="price">45 MAD</span></div><button class="order-btn">Order</button></div>
@@ -230,7 +238,6 @@ header {
 <!-- DRINK MENU -->
 <div id="drinkMenu" class="menu-box">
   <h3>Drinks Menu</h3>
-
   <div class="item"><div class="item-info">Coca-Cola<br><span class="price">10 MAD</span></div><button class="order-btn">Order</button></div>
   <div class="item"><div class="item-info">Sprite<br><span class="price">10 MAD</span></div><button class="order-btn">Order</button></div>
   <div class="item"><div class="item-info">Fanta<br><span class="price">10 MAD</span></div><button class="order-btn">Order</button></div>
@@ -239,11 +246,59 @@ header {
   <div class="item"><div class="item-info">Milkshake Vanilla<br><span class="price">18 MAD</span></div><button class="order-btn">Order</button></div>
 </div>
 
-<!-- CUSTOM ORDER BOX -->
+<!-- CUSTOM ORDER -->
 <div id="customBox" class="custom-box">
-  <input type="text" id="customInput" placeholder="Type your custom order and press Enter">
+  <input id="customInput" type="text" placeholder="Type your custom order and press Enter">
   <div id="successMsg" class="success-msg">Order is sent</div>
 </div>
+
+<!-- EXPLORE -->
+<section class="explore">
+  <h2>Explore CLICK.NJIK</h2>
+  <div class="explore-group">
+    <button class="pill-btn">🍔 Fast Food</button>
+    <button class="pill-btn">🍕 Pizza</button>
+    <button class="pill-btn">🥤 Drinks</button>
+    <button class="pill-btn">🌯 Tacos</button>
+    <button class="pill-btn">🍟 Snacks</button>
+    <button class="pill-btn">🔥 Promotions</button>
+    <button class="pill-btn">⭐ Best Sellers</button>
+    <button class="pill-btn">📍 Near You</button>
+    <button class="pill-btn">🕒 Open Now</button>
+    <button class="pill-btn">🚚 Delivery</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="big-footer">
+  <div class="footer-grid">
+    <div class="footer-box">
+      <h4>Liens utiles</h4>
+      <button class="footer-btn">Accueil</button>
+      <button class="footer-btn">Menu</button>
+      <button class="footer-btn">Commander</button>
+      <button class="footer-btn">Contact</button>
+    </div>
+
+    <div class="footer-box">
+      <h4>Nous suivre</h4>
+      <button class="footer-btn">Instagram</button>
+      <button class="footer-btn">Facebook</button>
+      <button class="footer-btn">TikTok</button>
+    </div>
+
+    <div class="footer-box">
+      <h4>Aide</h4>
+      <button class="footer-btn">FAQ</button>
+      <button class="footer-btn">Support</button>
+      <button class="footer-btn">Conditions</button>
+    </div>
+  </div>
+
+  <div class="footer-legal">
+    © 2026 CLICK.NJIK — All rights reserved
+  </div>
+</footer>
 
 <script>
 function toggleMenu(menuId) {
@@ -258,8 +313,8 @@ function toggleCustom() {
   document.getElementById("customBox").style.display = "block";
 }
 
-document.getElementById("customInput").addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
+document.getElementById("customInput").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
     document.getElementById("successMsg").style.display = "block";
   }
 });
