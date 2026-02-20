@@ -44,6 +44,15 @@ body {
 
 .hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
+/* --- GREEN MESSAGE STYLE --- */
+#emptyCartMsg {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: white; padding: 30px; border-radius: 20px;
+    border: 3px solid var(--success); color: var(--success);
+    font-size: 24px; font-weight: bold; z-index: 9999;
+    box-shadow: 0 0 30px rgba(46, 204, 113, 0.4);
+}
+
 /* --- LOGO BOX --- */
 .logo-box {
   width: 180px; height: 180px; margin: 40px auto 20px;
@@ -53,7 +62,6 @@ body {
 }
 .logo-box img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; }
 
-/* --- BUTTONS --- */
 .main-btn {
   padding: 15px 40px; font-size: 18px; border: none; border-radius: 50px;
   background: var(--orange); color: #1a1a1a; font-weight: bold; cursor: pointer; transition: 0.3s;
@@ -70,14 +78,12 @@ body {
 }
 .brand-btn:hover { background: var(--orange); color: #000; }
 
-/* --- MENU BOX --- */
 .menu-box {
   max-width: 800px; margin: 30px auto; background: #fff; color: #222;
   padding: 30px; border-radius: 25px; display: none; text-align: left;
 }
 .item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
 
-/* --- PAYMENT INPUTS --- */
 .pay-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
 
 /* --- EXPLORE --- */
@@ -97,6 +103,8 @@ body {
 
 <body>
 
+<div id="emptyCartMsg" class="hidden">Votre Panier est vide !! Choisir un repas</div>
+
 <div id="landingOverlay" class="overlay">
   <div class="modal-content" style="background:none; color:white; text-align:center;">
     <h1 style="font-size: 60px; color:var(--orange);">CLICK.NJIK</h1>
@@ -108,39 +116,13 @@ body {
 <div id="paymentOverlay" class="overlay hidden">
   <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
     <h2 style="margin-top:0; color:var(--blue);">Checkout / Paiement</h2>
-    
     <label><b>Informations Personnelles</b></label>
-    <div style="display:flex; gap:10px;">
-        <input type="email" class="pay-input" placeholder="Email">
-        <input type="tel" class="pay-input" placeholder="Téléphone">
-    </div>
-    
-    <label><b>Adresse de Livraison</b></label>
-    <input type="text" class="pay-input" placeholder="N° Appartement, Rue, Quartier, Ville">
-    
-    <label><b>Détails du Paiement</b></label>
-    <input type="text" class="pay-input" placeholder="Nom du titulaire">
-    <input type="text" class="pay-input" placeholder="Numéro de carte (16 chiffres)">
-    <div style="display:flex; gap:10px;">
-        <input type="text" class="pay-input" placeholder="MM/YY">
-        <input type="text" class="pay-input" placeholder="CVV">
-    </div>
-    
+    <div style="display:flex; gap:10px;"><input type="email" class="pay-input" placeholder="Email"><input type="tel" class="pay-input" placeholder="Téléphone"></div>
+    <label><b>Adresse de Livraison</b></label><input type="text" class="pay-input" placeholder="Rue, Quartier, Ville">
+    <label><b>Détails du Paiement</b></label><input type="text" class="pay-input" placeholder="Nom sur la carte"><input type="text" class="pay-input" placeholder="Numéro de carte">
+    <div style="display:flex; gap:10px;"><input type="text" class="pay-input" placeholder="MM/YY"><input type="text" class="pay-input" placeholder="CVV"></div>
     <label><b>Choisir votre Banque</b></label>
-    <select class="pay-input">
-        <option>CIH Bank</option>
-        <option>Attijariwafa Bank</option>
-        <option>Banque Populaire</option>
-        <option>BMCE Bank</option>
-        <option>Crédit Agricole</option>
-    </select>
-
-    <label><b>Mode de Livraison</b></label>
-    <select class="pay-input">
-        <option>Livraison Standard (30-45 min)</option>
-        <option>Livraison Prioritaire (+10 MAD)</option>
-    </select>
-
+    <select class="pay-input"><option>CIH Bank</option><option>Attijariwafa Bank</option><option>Banque Populaire</option></select>
     <button class="main-btn" style="width:100%; margin-top:15px;" onclick="alert('Transaction Réussie!')">Payer <span id="payTotal">0</span> MAD</button>
     <button onclick="closeOverlay('paymentOverlay')" style="display:block; margin:10px auto; color:red; border:none; background:none; cursor:pointer;">Annuler</button>
   </div>
@@ -155,45 +137,9 @@ body {
   </div>
 </div>
 
-<div id="contactOverlay" class="overlay hidden">
-  <div class="modal-content" style="text-align:center;">
-    <h2 style="color:var(--blue);">Contact Support</h2>
-    <p>If you happen to run to any kind of problem, please feel free to contact our support in the whatsapp number shown:</p>
-    <h1 style="color:var(--success);">06 31 60 61 11</h1>
-    <button class="main-btn" onclick="closeOverlay('contactOverlay')">Fermer</button>
-  </div>
-</div>
-
-<div id="faqOverlay" class="overlay hidden">
-  <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
-    <h2 style="color:var(--blue);">Questions Fréquentes (FAQ)</h2>
-    <p><b>1. Comment suivre ma commande ?</b><br>Un livreur est automatiquement assigné après validation.</p>
-    <hr>
-    <p><b>2. Quels sont les délais ?</b><br>En moyenne 30 à 45 minutes selon le trafic.</p>
-    <hr>
-    <p><b>3. Puis-je annuler ?</b><br>Oui, tant que la préparation n'a pas commencé.</p>
-    <hr>
-    <p><b>4. Modes de paiement ?</b><br>Cartes bancaires ou espèces à la livraison.</p>
-    <button class="main-btn" style="width:100%;" onclick="closeOverlay('faqOverlay')">Fermer</button>
-  </div>
-</div>
-
-<div id="aideOverlay" class="overlay hidden">
-  <div class="modal-content">
-    <h2 style="color:var(--blue);">Centre d'Aide</h2>
-    <p><b>Paiement refusé ?</b> Vérifiez vos plafonds ou contactez votre banque.</p>
-    <hr>
-    <p><b>Commande non reçue ?</b> Contactez le 06 31 60 61 11 via WhatsApp.</p>
-    <hr>
-    <p><b>Remboursement ?</b> Sous 48h après validation du support.</p>
-    <button class="main-btn" onclick="closeOverlay('aideOverlay')">Retour</button>
-  </div>
-</div>
-
-<div id="snacksOverlay" class="overlay hidden"><div class="modal-content"><h2 style="color:var(--blue)">Nos Snacks</h2><div class="scroll-area" id="snacksList"></div><button class="main-btn" style="width:100%;" onclick="closeOverlay('snacksOverlay')">Fermer</button></div></div>
-<div id="promoOverlay" class="overlay hidden"><div class="modal-content"><h2 style="color:var(--blue)">🔥 Promotions</h2><div class="scroll-area"><div class="promo-card"><p><b>Welcome Deal 🎁</b> -50% Off<br>End in: <span style="color:red">02:45:10</span></p></div><h3 style="color:var(--blue)">Upcoming</h3><p>📅 Feb 25: Taco Fest</p></div><button class="main-btn" style="width:100%;" onclick="closeOverlay('promoOverlay')">Fermer</button></div></div>
-<div id="bestOverlay" class="overlay hidden"><div class="modal-content"><h2 style="color:var(--blue)">⭐ Best Sellers</h2><div class="scroll-area" id="bestSellersContent"></div><button class="main-btn" style="width:100%;" onclick="closeOverlay('bestOverlay')">Fermer</button></div></div>
-<div id="nearOverlay" class="overlay hidden"><div class="modal-content"><h2 style="color:var(--blue)">📍 Distance Search</h2><div class="scroll-area"><h4 style="color:var(--orange)">20 km Away</h4><p>KFC Central, McDonald's North</p><h4 style="color:var(--orange)">35 km Away</h4><p>Burger King Mall, Starbucks East</p><h4 style="color:var(--orange)">50+ km Away</h4><p>Wendy's Outpost</p></div><button class="main-btn" style="width:100%;" onclick="closeOverlay('nearOverlay')">Fermer</button></div></div>
+<div id="contactOverlay" class="overlay hidden"><div class="modal-content" style="text-align:center;"><h2 style="color:var(--blue);">Contact Support</h2><p>If you happen to run to any kind of problem, please feel free to contact our support in the whatsapp number shown:</p><h1 style="color:var(--success);">06 31 60 61 11</h1><button class="main-btn" onclick="closeOverlay('contactOverlay')">Fermer</button></div></div>
+<div id="faqOverlay" class="overlay hidden"><div class="modal-content" style="max-height: 80vh; overflow-y: auto;"><h2 style="color:var(--blue);">FAQ</h2><p><b>1. Comment suivre ma commande ?</b><br>Un livreur est automatiquement assigné après validation.</p><hr><p><b>2. Quels sont les délais ?</b><br>En moyenne 30 à 45 minutes.</p><button class="main-btn" style="width:100%;" onclick="closeOverlay('faqOverlay')">Fermer</button></div></div>
+<div id="aideOverlay" class="overlay hidden"><div class="modal-content"><h2 style="color:var(--blue);">Centre d'Aide</h2><p><b>WhatsApp Support:</b> 06 31 60 61 11</p><p><b>Remboursement ?</b> Sous 48h après validation.</p><button class="main-btn" onclick="closeOverlay('aideOverlay')">Retour</button></div></div>
 
 <header>
   <div class="logo-box"><img src="logo.png" alt="CLICK.NJIK"></div>
@@ -211,10 +157,8 @@ body {
 
 <div id="menuDisplay" class="menu-box">
   <h2 id="resTitle" style="color:var(--blue); border-bottom:2px solid var(--orange);">Menu</h2>
-  <h3 style="color:var(--orange)">🍔 Food</h3>
-  <div id="foodItems"></div>
-  <h3 style="color:var(--orange); margin-top:20px;">🥤 Drinks</h3>
-  <div id="drinkItems"></div>
+  <h3 style="color:var(--orange)">🍔 Food</h3><div id="foodItems"></div>
+  <h3 style="color:var(--orange); margin-top:20px;">🥤 Drinks</h3><div id="drinkItems"></div>
   <button class="main-btn" style="margin-top:20px; font-size:14px;" onclick="document.getElementById('menuDisplay').style.display='none'">Fermer</button>
 </div>
 
@@ -222,8 +166,11 @@ body {
     <h3>📋 Votre Panier</h3>
     <div id="liveCartItems" style="text-align:left; margin-bottom:20px;"><p style="text-align:center; opacity:0.5;">Le panier est vide</p></div>
     <hr>
-    <h3>Total: <span id="cartTotal">0</span> MAD</h3>
-    <button class="main-btn" style="width:100%;" onclick="openPayment()">Payer</button>
+    <div style="display:flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap:10px;">
+        <h3>Total: <span id="cartTotal">0</span> MAD</h3>
+        <button class="main-btn" style="background: #e74c3c; color: white; padding: 10px 20px; font-size: 14px;" onclick="clearCart()">Vider le Panier</button>
+    </div>
+    <button class="main-btn" style="width:100%; margin-top:15px;" onclick="openPayment()">Payer</button>
 </div>
 
 <section class="explore">
@@ -245,50 +192,30 @@ body {
       <button class="footer-btn" onclick="showCommanderList()">Commander</button>
       <button class="footer-btn" onclick="openOverlay('contactOverlay')">Contact</button>
     </div>
-    <div class="footer-box">
-      <h4>Suivez-nous</h4>
-      <button class="footer-btn">Instagram</button>
-      <button class="footer-btn">TikTok</button>
-    </div>
-    <div class="footer-box">
-      <h4>Aide</h4>
-      <button class="footer-btn" onclick="openOverlay('faqOverlay')">FAQ</button>
-      <button class="footer-btn" onclick="openOverlay('aideOverlay')">Support</button>
-    </div>
+    <div class="footer-box"><h4>Suivez-nous</h4><button class="footer-btn">Instagram</button><button class="footer-btn">TikTok</button></div>
+    <div class="footer-box"><h4>Aide</h4><button class="footer-btn" onclick="openOverlay('faqOverlay')">FAQ</button><button class="footer-btn" onclick="openOverlay('aideOverlay')">Support</button></div>
   </div>
 </footer>
 
 <script>
 let cart = [];
 const data = {
-  kfc: { 
-    food:[{n:"Bucket 15pc",p:120},{n:"Zinger",p:45},{n:"Boxmaster",p:55},{n:"Twister",p:38},{n:"Colonel Burger",p:42},{n:"Wings 6pc",p:40},{n:"Tower Burger",p:52},{n:"Rice Box",p:45}],
-    drinks:[{n:"Pepsi",p:12},{n:"7Up",p:12},{n:"Mirinda",p:12},{n:"Water",p:6},{n:"Iced Tea",p:15}]
-  },
-  mcdonalds: { 
-    food:[{n:"Big Mac",p:48},{n:"McChicken",p:42},{n:"Nuggets 9pc",p:45},{n:"Big Tasty",p:68},{n:"Royal Cheese",p:52},{n:"Filet-o-Fish",p:40},{n:"Happy Meal",p:35},{n:"Signature Burger",p:75}],
-    drinks:[{n:"Coke",p:12},{n:"Fanta",p:12},{n:"Sprite",p:12},{n:"Orange Juice",p:15},{n:"McFlurry",p:30}]
-  },
-  starbucks: { 
-    food:[{n:"Muffin Choco",p:25},{n:"Cookie",p:22},{n:"Panini Cheese",p:48},{n:"Croissant",p:18},{n:"Brownie",p:28},{n:"Cheesecake",p:35},{n:"Bagel",p:30},{n:"Sandwich Tuna",p:42}],
-    drinks:[{n:"Latte",p:35},{n:"Caramel Macchiato",p:45},{n:"Frappuccino",p:50},{n:"Americano",p:28},{n:"Cold Brew",p:38}]
-  },
-  burgerking: { 
-    food:[{n:"Whopper",p:55},{n:"Big King",p:48},{n:"Steakhouse",p:72},{n:"Crispy Chicken",p:45},{n:"Long Chicken",p:48},{n:"Double Cheese",p:40},{n:"King Wings",p:42},{n:"Texas BBQ",p:65}],
-    drinks:[{n:"Coke",p:12},{n:"Fanta",p:12},{n:"Sprite",p:12},{n:"Milkshake",p:32},{n:"Fusion",p:28}]
-  },
-  tacobell: { 
-    food:[{n:"Crunchy Taco",p:25},{n:"Burrito",p:45},{n:"Quesadilla",p:50},{n:"Chalupa",p:48},{n:"Nachos Bell",p:55},{n:"Soft Taco",p:25},{n:"Power Bowl",p:60},{n:"Tostada",p:30}],
-    drinks:[{n:"Mountain Dew",p:15},{n:"Baja Blast",p:18},{n:"Iced Tea",p:12},{n:"Pepsi",p:12},{n:"Water",p:6}]
-  },
-  wendys: { 
-    food:[{n:"Baconator",p:78},{n:"Dave's Single",p:52},{n:"Spicy Chicken",p:55},{n:"4pc Nuggets",p:28},{n:"Chili Small",p:35},{n:"Baked Potato",p:30},{n:"Junior Burger",p:32},{n:"Double Stack",p:45}],
-    drinks:[{n:"Frosty Choco",p:25},{n:"Frosty Vanilla",p:25},{n:"Root Beer",p:15},{n:"Dr Pepper",p:15},{n:"Lemonade",p:18}]
-  }
+  kfc: { food:[{n:"Bucket 15pc",p:120},{n:"Zinger",p:45},{n:"Boxmaster",p:55},{n:"Twister",p:38},{n:"Colonel Burger",p:42},{n:"Wings 6pc",p:40},{n:"Tower Burger",p:52},{n:"Rice Box",p:45}], drinks:[{n:"Pepsi",p:12},{n:"7Up",p:12},{n:"Mirinda",p:12},{n:"Water",p:6},{n:"Iced Tea",p:15}] },
+  mcdonalds: { food:[{n:"Big Mac",p:48},{n:"McChicken",p:42},{n:"Nuggets 9pc",p:45},{n:"Big Tasty",p:68},{n:"Royal Cheese",p:52},{n:"Filet-o-Fish",p:40},{n:"Happy Meal",p:35},{n:"Signature Burger",p:75}], drinks:[{n:"Coke",p:12},{n:"Fanta",p:12},{n:"Sprite",p:12},{n:"Orange Juice",p:15},{n:"McFlurry",p:30}] },
+  starbucks: { food:[{n:"Muffin Choco",p:25},{n:"Cookie",p:22},{n:"Panini Cheese",p:48},{n:"Croissant",p:18},{n:"Brownie",p:28},{n:"Cheesecake",p:35},{n:"Bagel",p:30},{n:"Sandwich Tuna",p:42}], drinks:[{n:"Latte",p:35},{n:"Caramel Macchiato",p:45},{n:"Frappuccino",p:50},{n:"Americano",p:28},{n:"Cold Brew",p:38}] },
+  burgerking: { food:[{n:"Whopper",p:55},{n:"Big King",p:48},{n:"Steakhouse",p:72},{n:"Crispy Chicken",p:45},{n:"Long Chicken",p:48},{n:"Double Cheese",p:40},{n:"King Wings",p:42},{n:"Texas BBQ",p:65}], drinks:[{n:"Coke",p:12},{n:"Fanta",p:12},{n:"Sprite",p:12},{n:"Milkshake",p:32},{n:"Fusion",p:28}] },
+  tacobell: { food:[{n:"Crunchy Taco",p:25},{n:"Burrito",p:45},{n:"Quesadilla",p:50},{n:"Chalupa",p:48},{n:"Nachos Bell",p:55},{n:"Soft Taco",p:25},{n:"Power Bowl",p:60},{n:"Tostada",p:30}], drinks:[{n:"Mountain Dew",p:15},{n:"Baja Blast",p:18},{n:"Iced Tea",p:12},{n:"Pepsi",p:12},{n:"Water",p:6}] },
+  wendys: { food:[{n:"Baconator",p:78},{n:"Dave's Single",p:52},{n:"Spicy Chicken",p:55},{n:"4pc Nuggets",p:28},{n:"Chili Small",p:35},{n:"Baked Potato",p:30},{n:"Junior Burger",p:32},{n:"Double Stack",p:45}], drinks:[{n:"Frosty Choco",p:25},{n:"Frosty Vanilla",p:25},{n:"Root Beer",p:15},{n:"Dr Pepper",p:15},{n:"Lemonade",p:18}] }
 };
 
 function openOverlay(id) { document.getElementById(id).classList.remove('hidden'); }
 function closeOverlay(id) { document.getElementById(id).classList.add('hidden'); }
+
+function showEmptyMessage() {
+    const msg = document.getElementById('emptyCartMsg');
+    msg.classList.remove('hidden');
+    setTimeout(() => { msg.classList.add('hidden'); }, 3000);
+}
 
 function showMenu(brand) {
   const res = data[brand];
@@ -300,24 +227,9 @@ function showMenu(brand) {
   window.scrollTo(0, document.getElementById('menuDisplay').offsetTop - 50);
 }
 
-function openSnacks() {
-    let items = "";
-    for(let i=1; i<=20; i++) items += `<div class="item"><span>Snack Combo #${i}</span><span>20 MAD</span><button onclick="addToCart('Snack ${i}', 20)" style="background:var(--success); color:white; border:none; padding:5px; border-radius:5px;">+</button></div>`;
-    document.getElementById("snacksList").innerHTML = items;
-    openOverlay('snacksOverlay');
-}
-
-function openBestSellers() {
-    const items = [
-        {n:"1. Big Mac (McDo)", d:"Popular"}, {n:"2. Bucket 15pc (KFC)", d:"Hot"}, 
-        {n:"3. Caramel Macchiato", d:"Classic"}, {n:"4. Whopper (BK)", d:"Top Seller"},
-        {n:"5. Crunchy Taco", d:"Legendary"}
-    ];
-    document.getElementById("bestSellersContent").innerHTML = items.map(i => `<div class="item"><span>${i.n}</span><span>${i.d}</span></div>`).join('');
-    openOverlay('bestOverlay');
-}
-
 function addToCart(n, p) { cart.push({n, p}); updateCartUI(); }
+function clearCart() { cart = []; updateCartUI(); }
+function removeItem(idx) { cart.splice(idx, 1); updateCartUI(); }
 
 function updateCartUI() {
     const list = document.getElementById("liveCartItems");
@@ -328,19 +240,27 @@ function updateCartUI() {
     document.getElementById("payTotal").innerText = total;
 }
 
-function removeItem(idx) { cart.splice(idx, 1); updateCartUI(); }
-
 function showCommanderList() {
-  if(cart.length === 0) { 
-      alert("Votre Panier est vide !! Choisir un repas"); 
-      return; 
-  }
+  if(cart.length === 0) { showEmptyMessage(); return; }
   const list = document.getElementById("orderListItems");
   list.innerHTML = cart.map(i => `<div class="item"><span>${i.n}</span><span>${i.p} MAD</span></div>`).join('');
   openOverlay('orderListOverlay');
 }
 
-function openPayment() { if(cart.length === 0) alert("Votre Panier est vide !! Choisir un repas"); else openOverlay('paymentOverlay'); }
+function openPayment() { if(cart.length === 0) showEmptyMessage(); else openOverlay('paymentOverlay'); }
+
+// Simple logic for other modals kept as per requirements
+function openSnacks() {
+    let items = "";
+    for(let i=1; i<=20; i++) items += `<div class="item"><span>Snack Combo #${i}</span><span>20 MAD</span><button onclick="addToCart('Snack ${i}', 20)" style="background:var(--success); color:white; border:none; padding:5px; border-radius:5px;">+</button></div>`;
+    document.getElementById("snacksList").innerHTML = items;
+    openOverlay('snacksOverlay');
+}
+function openBestSellers() {
+    const items = [{n:"1. Big Mac", d:"Popular"}, {n:"2. Bucket KFC", d:"Hot"}];
+    document.getElementById("bestSellersContent").innerHTML = items.map(i => `<div class="item"><span>${i.n}</span><span>${i.d}</span></div>`).join('');
+    openOverlay('bestOverlay');
+}
 </script>
 
 </body>
