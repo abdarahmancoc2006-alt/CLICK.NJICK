@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CLICK.NJIK | Delivery Platform</title>
+<title>CLICK.NJIK | Delivery & Cart</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -11,6 +11,7 @@
   --blue: #122a45;
   --orange: #ff8c1a;
   --white: #ffffff;
+  --gray: #f4f4f4;
 }
 
 body {
@@ -28,7 +29,7 @@ body {
   top: 0; left: 0; width: 100%; height: 100%;
   background: radial-gradient(circle at center, #1c3d63, #050c16);
   display: flex; align-items: center; justify-content: center;
-  z-index: 1000; transition: opacity 0.6s ease, visibility 0.6s;
+  z-index: 2000; transition: opacity 0.6s ease, visibility 0.6s;
 }
 
 .landing-content {
@@ -48,16 +49,15 @@ body {
 /* HEADER */
 header { padding: 50px 20px 20px; }
 .logo-box {
-  width: 150px; height: 150px; margin: auto;
+  width: 130px; height: 130px; margin: auto;
   background: linear-gradient(145deg, #1c3d63, #0a1b2f);
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 0 25px rgba(255,140,26,0.4);
 }
-.logo-box img { width: 100px; height: 100px; border-radius: 50%; }
+.logo-box img { width: 90px; height: 90px; border-radius: 50%; }
 
-/* RESTAURANT SELECTOR */
+/* RESTAURANT SELECTION */
 .restaurant-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 15px; max-width: 1000px; margin: 30px auto; padding: 0 20px;
 }
 
@@ -68,13 +68,14 @@ header { padding: 50px 20px 20px; }
   font-weight: bold; cursor: pointer; transition: 0.3s;
 }
 
-.brand-btn:hover { background: var(--orange); color: #1a1a1a; transform: scale(1.05); }
+.brand-btn:hover { background: var(--orange); color: #1a1a1a; transform: translateY(-5px); }
 
 /* MENU BOX */
 .menu-box {
-  max-width: 750px; margin: 25px auto;
-  background: #f9f9f9; color: #222;
-  padding: 30px; border-radius: 20px; display: none;
+  max-width: 800px; margin: 25px auto;
+  background: white; color: #222;
+  padding: 30px; border-radius: 25px; display: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .menu-section { margin-bottom: 30px; text-align: left; }
@@ -85,35 +86,43 @@ header { padding: 50px 20px 20px; }
 
 .item {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 0; border-bottom: 1px solid #ddd;
+  padding: 15px 0; border-bottom: 1px solid #eee;
 }
 
 .order-btn {
-  background: var(--orange); border: none; padding: 8px 18px;
+  background: #2ecc71; color: white; border: none; padding: 8px 20px;
   border-radius: 20px; font-weight: bold; cursor: pointer;
 }
 
-/* EXPLORE SECTION */
-.explore { margin-top: 80px; padding: 70px 20px; background: #0b1a2a; }
-.explore-group { 
-    max-width: 1000px; margin: auto; display: flex; 
-    flex-wrap: wrap; justify-content: center; gap: 15px; 
-}
-.pill-btn {
-  padding: 14px 26px; border-radius: 30px; background: white;
-  color: #0b1a2a; border: none; font-weight: 600; cursor: pointer;
+/* CART SECTION */
+.cart-container {
+  max-width: 800px; margin: 40px auto;
+  background: #fff; color: #333;
+  padding: 25px; border-radius: 20px;
+  border: 3px solid var(--orange);
 }
 
-/* FOOTER */
+.cart-item {
+  display: flex; justify-content: space-between;
+  padding: 10px 0; border-bottom: 1px solid #ddd;
+}
+
+.total-box {
+  font-size: 24px; font-weight: bold; margin-top: 20px;
+  color: var(--blue); text-align: right;
+}
+
+/* EXPLORE & FOOTER */
+.explore { margin-top: 60px; padding: 60px 20px; background: #0b1a2a; }
+.explore-group { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.pill-btn { padding: 12px 22px; border-radius: 25px; border: none; cursor: pointer; font-weight: 600; }
+
 .big-footer { background: #050c16; padding: 60px 30px; }
 .footer-grid {
   max-width: 1100px; margin: auto; display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;
 }
-.footer-btn { 
-    display: block; background: none; border: none; color: white; 
-    opacity: 0.8; margin: 6px 0; cursor: pointer; 
-}
+.footer-btn { display: block; background: none; border: none; color: white; opacity: 0.7; margin: 6px 0; cursor: pointer; }
 </style>
 </head>
 
@@ -122,16 +131,14 @@ header { padding: 50px 20px 20px; }
 <div id="landingPage">
   <div class="landing-content">
     <h1>CLICK.NJIK</h1>
-    <p>Découvrez vos marques préférées livrées à votre porte. Choisissez McDonald's, KFC, Starbucks et plus encore en quelques secondes.</p>
+    <p>Le meilleur de la restauration rapide livré chez vous. Qualité premium, service instantané.</p>
     <button class="discover-btn" onclick="startApp()">Découvrir</button>
   </div>
 </div>
 
 <header>
-  <div class="logo-box">
-    <img src="logo.png" alt="CLICK.NJIK">
-  </div>
-  <p>Qualité • Livraison • Rapidité</p>
+  <div class="logo-box"><img src="logo.png" alt="Logo"></div>
+  <p>Votre panier : <strong id="cartCount">0</strong> articles</p>
 </header>
 
 <div class="restaurant-grid">
@@ -144,128 +151,128 @@ header { padding: 50px 20px 20px; }
 </div>
 
 <div id="menuDisplay" class="menu-box">
-  <h2 id="resTitle" style="color:var(--blue); margin-top:0;">Menu</h2>
-  
+  <h2 id="resTitle">Menu</h2>
   <div class="menu-section">
-    <h3>🍔 Food Selection</h3>
+    <h3>🛒 Food Items</h3>
     <div id="foodItems"></div>
   </div>
-
   <div class="menu-section">
     <h3>🥤 Drinks & Sides</h3>
     <div id="drinkItems"></div>
   </div>
+  <button class="discover-btn" style="padding:10px; font-size:14px;" onclick="document.getElementById('menuDisplay').style.display='none'">Fermer</button>
+</div>
 
-  <button class="discover-btn" style="padding:10px 30px; font-size:16px;" onclick="document.getElementById('menuDisplay').style.display='none'">Fermer le menu</button>
+<div class="cart-container">
+  <h2 style="margin-top:0;">📋 Votre Panier (Cart List)</h2>
+  <div id="cartItemsList">
+    <p style="color:#888;">Votre panier est vide...</p>
+  </div>
+  <div class="total-box">Total: <span id="totalPrice">0</span> MAD</div>
+  <button class="discover-btn" style="width:100%; margin-top:15px;" onclick="alert('Merci pour votre commande!')">Valider la commande</button>
 </div>
 
 <section class="explore">
-  <h2>Explore CLICK.NJIK</h2>
   <div class="explore-group">
-    <button class="pill-btn">🍔 Fast Food</button>
-    <button class="pill-btn">🍕 Pizza</button>
-    <button class="pill-btn">🥤 Drinks</button>
-    <button class="pill-btn">🌯 Tacos</button>
-    <button class="pill-btn">🍟 Snacks</button>
-    <button class="pill-btn">🔥 Promotions</button>
-    <button class="pill-btn">⭐ Best Sellers</button>
-    <button class="pill-btn">📍 Near You</button>
-    <button class="pill-btn">🕒 Open Now</button>
-    <button class="pill-btn">🚚 Delivery</button>
+    <button class="pill-btn">🍔 Fast Food</button> <button class="pill-btn">🍕 Pizza</button>
+    <button class="pill-btn">🥤 Drinks</button> <button class="pill-btn">🌯 Tacos</button>
+    <button class="pill-btn">🍟 Snacks</button> <button class="pill-btn">🔥 Promotions</button>
+    <button class="pill-btn">⭐ Favoris</button> <button class="pill-btn">📍 Proche</button>
   </div>
 </section>
 
 <footer class="big-footer">
   <div class="footer-grid">
     <div class="footer-box">
-      <h4>Liens utiles</h4>
-      <button class="footer-btn">Accueil</button>
-      <button class="footer-btn">Menu</button>
-      <button class="footer-btn">Commander</button>
-      <button class="footer-btn">Contact</button>
+      <h4>Liens</h4>
+      <button class="footer-btn">Accueil</button><button class="footer-btn">Menu</button><button class="footer-btn">Contact</button>
     </div>
     <div class="footer-box">
-      <h4>Nous suivre</h4>
-      <button class="footer-btn">Instagram</button>
-      <button class="footer-btn">Facebook</button>
-      <button class="footer-btn">TikTok</button>
+      <h4>Social</h4>
+      <button class="footer-btn">Instagram</button><button class="footer-btn">TikTok</button>
     </div>
     <div class="footer-box">
-      <h4>Aide</h4>
-      <button class="footer-btn">FAQ</button>
-      <button class="footer-btn">Support</button>
-      <button class="footer-btn">Conditions</button>
+      <h4>Support</h4>
+      <button class="footer-btn">FAQ</button><button class="footer-btn">Aide</button>
     </div>
   </div>
-  <div style="margin-top:40px; opacity:0.5; font-size:13px;">© 2026 CLICK.NJIK — All rights reserved</div>
 </footer>
 
 <script>
-const data = {
+let cart = [];
+let total = 0;
+
+const menuData = {
   kfc: {
-    name: "KFC Special Menu",
+    name: "KFC Selection",
     food: [
-        {n: "Bucket 15 Wings", p: "120 MAD"}, {n: "Zinger Burger", p: "45 MAD"}, 
-        {n: "Tower Burger", p: "50 MAD"}, {n: "6pc Hot & Crispy", p: "85 MAD"}
+      {n: "Bucket 15 Wings", p: 120}, {n: "Zinger Burger", p: 45}, {n: "Tower Burger", p: 55},
+      {n: "Twister Wrap", p: 35}, {n: "6pc Hot & Crispy", p: 85}, {n: "Boxmaster", p: 58},
+      {n: "Chicken Popcorn L", p: 40}, {n: "Zinger Cheese", p: 50}, {n: "Colonel Burger", p: 42},
+      {n: "Family Bucket", p: 190}
     ],
     drinks: [
-        {n: "Pepsi", p: "12 MAD"}, {n: "Mirinda Orange", p: "12 MAD"}, 
-        {n: "Coleslaw Medium", p: "15 MAD"}, {n: "Large Fries", p: "20 MAD"}
+      {n: "Pepsi 1L", p: 15}, {n: "Coleslaw", p: 12}, {n: "Fries XL", p: 22}, {n: "7Up", p: 10}
     ]
   },
   mcdonalds: {
     name: "McDonald's Menu",
     food: [
-        {n: "Big Mac", p: "48 MAD"}, {n: "Grand Deluxe", p: "60 MAD"}, 
-        {n: "Chicken McNuggets 9pc", p: "38 MAD"}, {n: "Royal Cheese", p: "45 MAD"}
+      {n: "Big Mac", p: 48}, {n: "Grand Deluxe", p: 65}, {n: "McChicken", p: 40},
+      {n: "9pc Nuggets", p: 42}, {n: "CBO Burger", p: 60}, {n: "Double Cheese", p: 35},
+      {n: "Royal Cheese", p: 55}, {n: "Filet-O-Fish", p: 38}, {n: "Big Tasty", p: 70},
+      {n: "Happy Meal", p: 35}
     ],
     drinks: [
-        {n: "Coca-Cola", p: "12 MAD"}, {n: "McFlurry Oreo", p: "28 MAD"}, 
-        {n: "Apple Pie", p: "18 MAD"}, {n: "Orange Juice", p: "15 MAD"}
+      {n: "Coca XL", p: 15}, {n: "McFlurry Oreo", p: 30}, {n: "Sundae", p: 20}, {n: "Orange Juice", p: 18}
     ]
   },
   starbucks: {
-    name: "Starbucks Coffee & Sweets",
+    name: "Starbucks Store",
     food: [
-        {n: "Caramel Muffin", p: "25 MAD"}, {n: "Cheese Sandwich", p: "35 MAD"}, 
-        {n: "Chocolate Cookie", p: "22 MAD"}, {n: "Croissant", p: "20 MAD"}
+      {n: "Chocolate Muffin", p: 25}, {n: "Cheese Toastie", p: 38}, {n: "Blueberry Cake", p: 30},
+      {n: "Chicken Panini", p: 45}, {n: "Cookie Choco", p: 22}, {n: "Brownie", p: 28},
+      {n: "Almond Croissant", p: 24}, {n: "Tuna Wrap", p: 40}, {n: "Bagel Cream Cheese", p: 32},
+      {n: "Donut Glazed", p: 18}
     ],
     drinks: [
-        {n: "Caramel Macchiato", p: "42 MAD"}, {n: "Iced Latte", p: "38 MAD"}, 
-        {n: "Java Chip Frappuccino", p: "48 MAD"}, {n: "Cold Brew", p: "35 MAD"}
+      {n: "Latte XL", p: 38}, {n: "Caramel Macchiato", p: 45}, {n: "Java Frappe", p: 50}, {n: "Cold Brew", p: 35}
     ]
   },
   burgerking: {
-    name: "Burger King | Home of the Whopper",
+    name: "Burger King Selection",
     food: [
-        {n: "Whopper", p: "55 MAD"}, {n: "Steakhouse Burger", p: "68 MAD"}, 
-        {n: "Long Chicken", p: "45 MAD"}, {n: "Double Cheese", p: "40 MAD"}
+        {n: "Whopper", p: 55}, {n: "Steakhouse XXL", p: 75}, {n: "Big King", p: 45},
+        {n: "Crispy Chicken", p: 40}, {n: "Double Whopper", p: 70}, {n: "Long Chili Cheese", p: 50},
+        {n: "Chicken Royale", p: 48}, {n: "BBQ Bacon", p: 62}, {n: "Veggie Burger", p: 45},
+        {n: "Nugget Burger", p: 30}
     ],
     drinks: [
-        {n: "7Up", p: "12 MAD"}, {n: "Onion Rings 8pc", p: "22 MAD"}, 
-        {n: "King Shake", p: "30 MAD"}, {n: "Fries Large", p: "20 MAD"}
+        {n: "Onion Rings", p: 25}, {n: "Fries Cheese", p: 28}, {n: "King Shake", p: 32}, {n: "Dr Pepper", p: 15}
     ]
   },
   tacobell: {
-    name: "Taco Bell Mexican Style",
+    name: "Taco Bell Menu",
     food: [
-        {n: "Crunchy Taco Supreme", p: "25 MAD"}, {n: "Chicken Quesadilla", p: "48 MAD"}, 
-        {n: "Beef Burrito", p: "45 MAD"}, {n: "Naked Chicken Chalupa", p: "52 MAD"}
+        {n: "Crunchy Taco", p: 25}, {n: "Soft Taco Supreme", p: 30}, {n: "Quesadilla", p: 50},
+        {n: "Burrito Beef", p: 45}, {n: "7-Layer Burrito", p: 55}, {n: "Chalupa", p: 48},
+        {n: "Nachos BellGrande", p: 60}, {n: "Enchirito", p: 42}, {n: "Cheesy Melt", p: 35},
+        {n: "Taco Party Pack", p: 150}
     ],
     drinks: [
-        {n: "Mountain Dew", p: "15 MAD"}, {n: "Nachos Cheese", p: "28 MAD"}, 
-        {n: "Cinnamon Twists", p: "15 MAD"}, {n: "Iced Tea", p: "12 MAD"}
+        {n: "Mountain Dew", p: 15}, {n: "Cinnamon Twists", p: 18}, {n: "Nacho Fries", p: 22}, {n: "Ice Tea", p: 12}
     ]
   },
   wendys: {
-    name: "Wendy's Quality Burger",
+    name: "Wendy's Fresh Menu",
     food: [
-        {n: "Baconator", p: "75 MAD"}, {n: "Dave's Single", p: "50 MAD"}, 
-        {n: "Spicy Chicken Sandwich", p: "55 MAD"}, {n: "4pc Nuggets", p: "25 MAD"}
+        {n: "Baconator", p: 78}, {n: "Dave's Triple", p: 85}, {n: "Spicy Chicken", p: 52},
+        {n: "Junior Cheeseburger", p: 30}, {n: "Classic Single", p: 48}, {n: "10pc Nuggets", p: 40},
+        {n: "Bacon Double", p: 60}, {n: "Son of Baconator", p: 65}, {n: "Potato Bacon", p: 35},
+        {n: "Chili Bowl", p: 28}
     ],
     drinks: [
-        {n: "Chocolate Frosty", p: "20 MAD"}, {n: "Vanilla Frosty", p: "20 MAD"}, 
-        {n: "Dr Pepper", p: "15 MAD"}, {n: "Baked Potato", p: "30 MAD"}
+        {n: "Chocolate Frosty", p: 22}, {n: "Vanilla Frosty", p: 22}, {n: "Root Beer", p: 15}, {n: "Baked Potato", p: 25}
     ]
   }
 };
@@ -276,16 +283,50 @@ function startApp() {
 }
 
 function showMenu(brand) {
-  const res = data[brand];
+  const res = menuData[brand];
   document.getElementById("resTitle").innerText = res.name;
   
-  const foodHtml = res.food.map(i => `<div class="item"><span>${i.n}<br><small>${i.p}</small></span><button class="order-btn">Order</button></div>`).join('');
-  const drinkHtml = res.drinks.map(i => `<div class="item"><span>${i.n}<br><small>${i.p}</small></span><button class="order-btn">Order</button></div>`).join('');
-  
-  document.getElementById("foodItems").innerHTML = foodHtml;
-  document.getElementById("drinkItems").innerHTML = drinkHtml;
+  const genHtml = (arr) => arr.map(i => `
+    <div class="item">
+      <span><strong>${i.n}</strong><br><small>${i.p} MAD</small></span>
+      <button class="order-btn" onclick="addToCart('${i.n}', ${i.p})">Order</button>
+    </div>`).join('');
+
+  document.getElementById("foodItems").innerHTML = genHtml(res.food);
+  document.getElementById("drinkItems").innerHTML = genHtml(res.drinks);
   document.getElementById("menuDisplay").style.display = "block";
   window.scrollTo({ top: document.getElementById('menuDisplay').offsetTop - 20, behavior: 'smooth' });
+}
+
+function addToCart(name, price) {
+  cart.push({name, price});
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const list = document.getElementById("cartItemsList");
+  const totalEl = document.getElementById("totalPrice");
+  const countEl = document.getElementById("cartCount");
+
+  if(cart.length === 0) {
+    list.innerHTML = `<p style="color:#888;">Votre panier est vide...</p>`;
+  } else {
+    list.innerHTML = cart.map((item, index) => `
+      <div class="cart-item">
+        <span>${item.name}</span>
+        <span>${item.price} MAD <button onclick="removeFromCart(${index})" style="background:red; color:white; border:none; border-radius:50%; cursor:pointer;">X</button></span>
+      </div>
+    `).join('');
+  }
+
+  total = cart.reduce((sum, item) => sum + item.price, 0);
+  totalEl.innerText = total;
+  countEl.innerText = cart.length;
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCartUI();
 }
 </script>
 
