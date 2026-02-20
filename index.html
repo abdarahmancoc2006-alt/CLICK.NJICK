@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +59,6 @@ body {
   padding: 15px 40px; font-size: 18px; border: none; border-radius: 50px;
   background: var(--orange); color: #1a1a1a; font-weight: bold; cursor: pointer; transition: 0.3s;
 }
-.main-btn:hover { transform: scale(1.05); }
 
 /* --- BRAND GRID --- */
 .restaurant-grid {
@@ -71,14 +71,17 @@ body {
 }
 .brand-btn:hover { background: var(--orange); color: #000; }
 
-/* --- MENU --- */
+/* --- MENU BOX --- */
 .menu-box {
   max-width: 800px; margin: 30px auto; background: #fff; color: #222;
   padding: 30px; border-radius: 25px; display: none; text-align: left;
 }
 .item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
 
-/* --- EXPLORE SECTION --- */
+/* --- PAYMENT --- */
+.pay-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+
+/* --- EXPLORE --- */
 .explore { margin-top: 80px; padding: 70px 20px; background: #0b1a2a; }
 .explore-group { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
 .pill-btn { padding: 14px 26px; border-radius: 30px; background: white; color: #0b1a2a; border: none; font-weight: 600; cursor: pointer; }
@@ -104,6 +107,34 @@ body {
   </div>
 </div>
 
+<div id="paymentOverlay" class="overlay hidden">
+  <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
+    <h2 style="margin-top:0; color:var(--blue);">Checkout / Paiement</h2>
+    <label><b>Personal Info</b></label>
+    <div style="display:flex; gap:10px;">
+        <input type="text" class="pay-input" placeholder="Email">
+        <input type="text" class="pay-input" placeholder="Phone">
+    </div>
+    <label><b>Shipping Address</b></label>
+    <input type="text" class="pay-input" placeholder="Street Address, City">
+    <label><b>Card Details</b></label>
+    <input type="text" class="pay-input" placeholder="Cardholder Name">
+    <input type="text" class="pay-input" placeholder="Card Number (16 digits)">
+    <div style="display:flex; gap:10px;">
+        <input type="text" class="pay-input" placeholder="MM/YY">
+        <input type="text" class="pay-input" placeholder="CVV">
+    </div>
+    <label><b>Bank Selection</b></label>
+    <select class="pay-input">
+        <option>CIH Bank</option>
+        <option>Attijariwafa Bank</option>
+        <option>Banque Populaire</option>
+    </select>
+    <button class="main-btn" style="width:100%; margin-top:15px;" onclick="alert('Payment Successful!')">Pay <span id="payTotal">0</span> MAD</button>
+    <button onclick="closeOverlay('paymentOverlay')" style="display:block; margin:10px auto; color:red; border:none; background:none; cursor:pointer;">Cancel</button>
+  </div>
+</div>
+
 <div id="snacksOverlay" class="overlay hidden">
   <div class="modal-content">
     <h2 style="color:var(--blue)">Nos Snacks Grignotines</h2>
@@ -117,14 +148,10 @@ body {
     <h2 style="color:var(--blue)">🔥 Promotions Actuelles</h2>
     <div class="scroll-area">
         <div class="promo-card">
-            <p><b>Offre de Bienvenue 🎁</b><br> -50% sur votre premier menu KFC !<br>Fin dans: <span style="color:red">02:45:10</span></p>
+            <p><b>Offre de Bienvenue 🎁</b><br> -50% sur premier menu !<br>End in: <span style="color:red">02:45:10</span></p>
         </div>
-        <div class="promo-card">
-            <p><b>Happy Hour Starbucks ☕</b><br> 1 Café acheté = 1 Cookie offert !<br>Fin dans: <span style="color:red">00:20:05</span></p>
-        </div>
-        <h3 style="color:var(--blue)">🚀 Prochainement</h3>
-        <p>📅 <b>25 Février:</b> Festival du Taco - Tout à 10 MAD 🌮</p>
-        <p>📅 <b>01 Mars:</b> Livraison gratuite toute la journée 🚚</p>
+        <h3 style="color:var(--blue)">🚀 Upcoming</h3>
+        <p>📅 <b>Feb 25:</b> Taco Festival 🌮</p>
     </div>
     <button class="main-btn" style="width:100%; margin-top:15px;" onclick="closeOverlay('promoOverlay')">Fermer</button>
   </div>
@@ -132,13 +159,10 @@ body {
 
 <div id="bestOverlay" class="overlay hidden">
   <div class="modal-content">
-    <h2 style="color:var(--blue)">⭐ Best Sellers (Tendances)</h2>
+    <h2 style="color:var(--blue)">⭐ Best Sellers</h2>
     <div class="scroll-area">
-        <div class="item"><span>1. Big Mac (McDo)</span><span>🔥 2.5k orders</span></div>
-        <div class="item"><span>2. Bucket 15pc (KFC)</span><span>🔥 1.9k orders</span></div>
-        <div class="item"><span>3. Whopper (Burger King)</span><span>🔥 1.4k orders</span></div>
-        <div class="item"><span>4. Caramel Macchiato</span><span>🔥 1.2k orders</span></div>
-        <div class="item"><span>5. Crunchy Taco</span><span>🔥 980 orders</span></div>
+        <div class="item"><span>1. Big Mac</span><span>🔥 Popular</span></div>
+        <div class="item"><span>2. Zinger Burger</span><span>🔥 Hot</span></div>
     </div>
     <button class="main-btn" style="width:100%; margin-top:15px;" onclick="closeOverlay('bestOverlay')">Fermer</button>
   </div>
@@ -146,40 +170,33 @@ body {
 
 <div id="nearOverlay" class="overlay hidden">
   <div class="modal-content">
-    <h2 style="color:var(--blue)">📍 Restaurants à Proximité</h2>
+    <h2 style="color:var(--blue)">📍 Distance Search</h2>
     <div class="scroll-area">
-        <h4 style="color:var(--orange)">Zone Proche (0 - 20 km)</h4>
-        <p>KFC Center, McDonald's Drive, Pizza Hut Express</p>
-        <hr>
-        <h4 style="color:var(--orange)">Zone Moyenne (20 - 35 km)</h4>
-        <p>Burger King Mall, Starbucks Downtown, Taco Bell Plaza</p>
-        <hr>
-        <h4 style="color:var(--orange)">Longue Distance (50+ km)</h4>
-        <p>Wendy's Highway, Dunkin' Station, Subway North</p>
+        <h4 style="color:var(--orange)">20 km Away</h4>
+        <p>KFC Central, McDonald's North</p>
+        <h4 style="color:var(--orange)">35 km Away</h4>
+        <p>Burger King Mall, Starbucks East</p>
+        <h4 style="color:var(--orange)">50+ km Away</h4>
+        <p>Wendy's Outpost</p>
     </div>
     <button class="main-btn" style="width:100%; margin-top:15px;" onclick="closeOverlay('nearOverlay')">Fermer</button>
   </div>
 </div>
 
 <div id="faqOverlay" class="overlay hidden">
-  <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
-    <h2 style="color:var(--blue);">Questions Fréquentes (FAQ)</h2>
-    <p><b>1. Comment suivre ma commande ?</b><br>Un livreur est assigné automatiquement après validation.</p>
-    <hr>
-    <p><b>2. Quels sont les délais ?</b><br>Moyenne de 30 à 45 minutes selon le trafic.</p>
-    <hr>
-    <p><b>3. Annulation ?</b><br>Possible avant le début de la préparation en cuisine.</p>
-    <button class="main-btn" style="width:100%;" onclick="closeOverlay('faqOverlay')">Fermer</button>
+  <div class="modal-content">
+    <h2 style="color:var(--blue);">FAQ</h2>
+    <p><b>How to track?</b> Automatic after validation.</p>
+    <p><b>Delivery time?</b> 30-45 mins.</p>
+    <button class="main-btn" onclick="closeOverlay('faqOverlay')">Close</button>
   </div>
 </div>
-
 <div id="aideOverlay" class="overlay hidden">
   <div class="modal-content">
-    <h2 style="color:var(--blue);">Centre d'Aide & Assistance</h2>
-    <p><b>Paiement refusé ?</b> Vérifiez vos plafonds bancaires ou contactez le support.</p>
-    <hr>
-    <p><b>Commande erronée ?</b> Envoyez une photo au 06 31 60 61 11 via WhatsApp.</p>
-    <button class="main-btn" style="width:100%;" onclick="closeOverlay('aideOverlay')">Retour</button>
+    <h2 style="color:var(--blue);">Centre d'Aide</h2>
+    <p><b>Payment issue?</b> Contact your bank.</p>
+    <p><b>WhatsApp Support:</b> 06 31 60 61 11</p>
+    <button class="main-btn" onclick="closeOverlay('aideOverlay')">Back</button>
   </div>
 </div>
 
@@ -195,6 +212,15 @@ body {
   <button class="brand-btn" onclick="showMenu('burgerking')">👑 Burger King</button>
   <button class="brand-btn" onclick="showMenu('tacobell')">🌮 Taco Bell</button>
   <button class="brand-btn" onclick="showMenu('wendys')">🥩 Wendy's</button>
+</div>
+
+<div id="menuDisplay" class="menu-box">
+  <h2 id="resTitle" style="color:var(--blue); border-bottom:2px solid var(--orange);">Menu</h2>
+  <h3 style="color:var(--orange)">🍔 Food</h3>
+  <div id="foodItems"></div>
+  <h3 style="color:var(--orange); margin-top:20px;">🥤 Drinks</h3>
+  <div id="drinkItems"></div>
+  <button class="main-btn" style="margin-top:20px; font-size:14px;" onclick="document.getElementById('menuDisplay').style.display='none'">Fermer</button>
 </div>
 
 <div id="cartArea" style="max-width:800px; margin:40px auto; padding:30px; background:rgba(255,255,255,0.05); border-radius:20px; border:1px solid var(--orange);">
@@ -218,8 +244,18 @@ body {
 <footer class="big-footer">
   <div class="footer-grid">
     <div class="footer-box">
-      <h4>Liens utiles</h4>
-      <button class="footer-btn" onclick="openOverlay('landingOverlay')">Accueil</button>
+      <h4>Useful Links</h4>
+      <button class="footer-btn" onclick="openOverlay('landingOverlay')">Home</button>
+      <button class="footer-btn" onclick="window.scrollTo(0,0)">Menu</button>
+      <button class="footer-btn">Contact</button>
+    </div>
+    <div class="footer-box">
+      <h4>Follow Us</h4>
+      <button class="footer-btn">Instagram</button>
+      <button class="footer-btn">TikTok</button>
+    </div>
+    <div class="footer-box">
+      <h4>Help</h4>
       <button class="footer-btn" onclick="openOverlay('faqOverlay')">FAQ</button>
       <button class="footer-btn" onclick="openOverlay('aideOverlay')">Support</button>
     </div>
@@ -228,37 +264,47 @@ body {
 
 <script>
 let cart = [];
+const data = {
+  kfc: { food:[{n:"Bucket 15pc",p:120},{n:"Zinger",p:45}], drinks:[{n:"Pepsi",p:12}] },
+  mcdonalds: { food:[{n:"Big Mac",p:48},{n:"Nuggets",p:42}], drinks:[{n:"Coke",p:12}] },
+  starbucks: { food:[{n:"Muffin",p:25}], drinks:[{n:"Latte",p:35}] },
+  burgerking: { food:[{n:"Whopper",p:55}], drinks:[{n:"Coke",p:12}] },
+  tacobell: { food:[{n:"Taco",p:25}], drinks:[{n:"Soda",p:12}] },
+  wendys: { food:[{n:"Baconator",p:78}], drinks:[{n:"Frosty",p:25}] }
+};
 
 function openOverlay(id) { document.getElementById(id).classList.remove('hidden'); }
 function closeOverlay(id) { document.getElementById(id).classList.add('hidden'); }
 
+function showMenu(brand) {
+  const res = data[brand];
+  const gen = (arr) => arr.map(i => `<div class="item"><span>${i.n} - ${i.p} MAD</span><button onclick="addToCart('${i.n}', ${i.p})" style="background:var(--success); color:white; border:none; padding:8px 15px; border-radius:10px; cursor:pointer;">Ajouter</button></div>`).join('');
+  document.getElementById("resTitle").innerText = brand.toUpperCase();
+  document.getElementById("foodItems").innerHTML = gen(res.food);
+  document.getElementById("drinkItems").innerHTML = gen(res.drinks);
+  document.getElementById("menuDisplay").style.display = "block";
+  window.scrollTo(0, document.getElementById('menuDisplay').offsetTop - 50);
+}
+
 function openSnacks() {
-    const list = document.getElementById("snacksList");
     let items = "";
-    for(let i=1; i<=20; i++) {
-        items += `<div class="item"><span>Snack #00${i} (Frites, Nuggets, Mix)</span><span>15 MAD</span><button onclick="addToCart('Snack ${i}', 15)" style="background:var(--success); color:white; border:none; padding:5px; border-radius:5px; cursor:pointer;">+</button></div>`;
-    }
-    list.innerHTML = items;
+    for(let i=1; i<=20; i++) items += `<div class="item"><span>Snack Pack #${i}</span><span>15 MAD</span><button onclick="addToCart('Snack ${i}', 15)" style="background:var(--success); color:white; border:none; padding:5px; border-radius:5px;">+</button></div>`;
+    document.getElementById("snacksList").innerHTML = items;
     openOverlay('snacksOverlay');
 }
 
-function addToCart(n, p) {
-    cart.push({n, p});
-    updateCartUI();
-}
+function addToCart(n, p) { cart.push({n, p}); updateCartUI(); }
 
 function updateCartUI() {
     const list = document.getElementById("liveCartItems");
-    if(cart.length === 0) list.innerHTML = "<p style='text-align:center;'>Vide</p>";
-    else list.innerHTML = cart.map((i, idx) => `<div class="item">${i.n} - ${i.p} MAD</div>`).join('');
+    if(cart.length === 0) list.innerHTML = "<p style='text-align:center;'>Empty</p>";
+    else list.innerHTML = cart.map(i => `<div class="item">${i.n} - ${i.p} MAD</div>`).join('');
     const total = cart.reduce((sum, i) => sum + i.p, 0);
     document.getElementById("cartTotal").innerText = total;
+    document.getElementById("payTotal").innerText = total;
 }
 
-function openPayment() { alert("Redirection vers le paiement..."); }
-
-// Brand menu dummy logic kept as per previous requirements
-function showMenu(brand) { alert("Menu " + brand + " affiché !"); }
+function openPayment() { if(cart.length === 0) alert("Cart empty!"); else openOverlay('paymentOverlay'); }
 </script>
 
 </body>
