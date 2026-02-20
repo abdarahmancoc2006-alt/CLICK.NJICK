@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CLICK.NJIK | Professional Delivery</title>
+<title>CLICK.NJIK | Complete Delivery</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -28,19 +28,12 @@ body {
 .overlay {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at center, #1c3d63, #050c16);
+  background: rgba(5, 12, 22, 0.95);
   display: flex; align-items: center; justify-content: center;
-  z-index: 5000; transition: 0.5s;
+  z-index: 5000; transition: 0.4s;
 }
 
-/* Original Landing Overlay Style */
-#landingOverlay { z-index: 6000; }
-.landing-content {
-  max-width: 600px; padding: 40px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px; backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 140, 26, 0.3);
-}
+#landingOverlay { z-index: 6000; background: radial-gradient(circle at center, #1c3d63, #050c16); }
 
 .modal-content {
   max-width: 550px; width: 90%; padding: 40px;
@@ -51,44 +44,44 @@ body {
 
 .hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-/* --- LOGO & HEADER --- */
-header { padding: 50px 20px 30px; }
+/* --- LOGO BOX --- */
 .logo-box {
-  width: 200px; height: 200px; margin: auto;
+  width: 180px; height: 180px; margin: 40px auto 20px;
   background: linear-gradient(145deg, #1c3d63, #0a1b2f);
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
   box-shadow: 0 0 25px rgba(255,140,26,0.5);
 }
-.logo-box img { width: 135px; height: 135px; border-radius: 50%; object-fit: cover; background: #0a1b2f; padding: 10px; }
+.logo-box img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; }
 
 /* --- BUTTONS --- */
 .main-btn {
-  padding: 14px 36px; font-size: 17px;
-  background: linear-gradient(135deg, var(--orange), #ffb347);
-  color: #1a1a1a; border: none; border-radius: 50px;
-  font-weight: bold; cursor: pointer; transition: 0.3s;
+  padding: 15px 40px; font-size: 18px; border: none; border-radius: 50px;
+  background: var(--orange); color: #1a1a1a; font-weight: bold; cursor: pointer; transition: 0.3s;
 }
+.main-btn:hover { transform: scale(1.05); }
 
-/* --- BRAND SELECTION --- */
+/* --- BRAND GRID --- */
 .restaurant-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 20px; max-width: 1000px; margin: 40px auto; padding: 0 20px;
 }
 .brand-btn { 
   padding: 25px; border-radius: 20px; background: rgba(255,255,255,0.05); 
-  color: white; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; font-weight: bold;
+  color: white; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; font-weight: bold; font-size: 18px;
 }
 .brand-btn:hover { background: var(--orange); color: #000; }
 
 /* --- MENU --- */
 .menu-box {
-  max-width: 800px; margin: 30px auto; background: white; color: #222;
-  padding: 30px; border-radius: 20px; display: none; text-align: left;
+  max-width: 800px; margin: 30px auto; background: #fff; color: #222;
+  padding: 30px; border-radius: 25px; display: none; text-align: left;
 }
-.menu-title { border-bottom: 2px solid var(--orange); padding-bottom: 10px; color: var(--blue); }
-.item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
+.item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
 
-/* --- EXPLORE --- */
+/* --- PAYMENT MENU (RESTORED TO DETAILED VERSION) --- */
+.pay-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+
+/* --- EXPLORE (RESTORED) --- */
 .explore { margin-top: 80px; padding: 70px 20px; background: #0b1a2a; }
 .explore-group { max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
 .pill-btn { padding: 14px 26px; border-radius: 30px; background: white; color: #0b1a2a; border: none; font-weight: 600; cursor: pointer; }
@@ -96,16 +89,16 @@ header { padding: 50px 20px 30px; }
 /* --- FOOTER --- */
 .big-footer { background: #050c16; padding: 60px 30px; }
 .footer-grid { max-width: 1100px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
-.footer-btn { display: block; background: none; border: none; color: white; opacity: 0.8; margin: 8px 0; cursor: pointer; text-align: left; }
+.footer-btn { display: block; background: none; border: none; color: white; opacity: 0.8; margin: 8px 0; cursor: pointer; text-align: left; font-size: 16px; }
 </style>
 </head>
 
 <body>
 
 <div id="landingOverlay" class="overlay">
-  <div class="landing-content">
-    <h1>Bienvenue chez CLICK.NJIK</h1>
-    <p>Votre partenaire de livraison rapide et fiable. Nous connectons les meilleurs restaurants locaux directement à votre porte.</p>
+  <div class="modal-content" style="background:none; color:white; text-align:center;">
+    <h1 style="font-size: 60px; color:var(--orange);">CLICK.NJIK</h1>
+    <p style="font-size: 22px;">Fast Food • Delivery • Quality</p>
     <button class="main-btn" onclick="closeOverlay('landingOverlay')">Découvrir</button>
   </div>
 </div>
@@ -113,24 +106,31 @@ header { padding: 50px 20px 30px; }
 <div id="orderListOverlay" class="overlay hidden">
   <div class="modal-content">
     <h2 style="color:var(--blue)">Your order list:</h2>
-    <div id="finalOrderItems" style="margin-bottom:20px;"></div>
-    <div style="font-weight:bold; font-size:20px; border-top:2px solid #eee; padding-top:10px;">Total: <span id="finalTotal">0</span> MAD</div>
-    <button class="main-btn" style="width:100%; margin-top:20px;" onclick="closeOverlay('orderListOverlay')">Continuer mes achats</button>
+    <div id="orderListItems" style="max-height: 300px; overflow-y: auto;"></div>
+    <hr>
+    <button class="main-btn" style="width:100%;" onclick="closeOverlay('orderListOverlay')">Fermer</button>
   </div>
 </div>
 
 <div id="paymentOverlay" class="overlay hidden">
   <div class="modal-content">
-    <h2 style="color:var(--blue);">Paiement Bancaire</h2>
-    <input type="text" class="pay-input" placeholder="Nom sur la carte" style="width:100%; padding:10px; margin:5px 0;">
-    <input type="text" class="pay-input" placeholder="Numéro de Carte" style="width:100%; padding:10px; margin:5px 0;">
-    <select style="width:100%; padding:10px; margin:5px 0;">
+    <h2 style="margin-top:0; color:var(--blue);">Checkout / Paiement</h2>
+    <label>Nom du titulaire</label>
+    <input type="text" class="pay-input" placeholder="Ahmed Benali">
+    <label>Numéro de carte</label>
+    <input type="text" class="pay-input" placeholder="1234 5678 9101 1121">
+    <div style="display:flex; gap:10px;">
+        <input type="text" class="pay-input" placeholder="MM/YY">
+        <input type="text" class="pay-input" placeholder="CVV">
+    </div>
+    <label>Choisir votre Banque</label>
+    <select class="pay-input">
         <option>CIH Bank</option>
         <option>Attijariwafa Bank</option>
         <option>Banque Populaire</option>
     </select>
-    <button class="main-btn" style="width:100%; margin-top:10px;" onclick="alert('Paiement Réussi!')">Confirmer</button>
-    <button onclick="closeOverlay('paymentOverlay')" style="color:red; background:none; border:none; width:100%; cursor:pointer; margin-top:10px;">Annuler</button>
+    <button class="main-btn" style="width:100%; margin-top:15px;" onclick="alert('Transaction Réussie!')">Payer <span id="payTotal">0</span> MAD</button>
+    <button onclick="closeOverlay('paymentOverlay')" style="display:block; margin:10px auto; color:red; border:none; background:none; cursor:pointer;">Annuler</button>
   </div>
 </div>
 
@@ -144,15 +144,26 @@ header { padding: 50px 20px 30px; }
 </div>
 
 <div id="faqOverlay" class="overlay hidden">
-  <div class="modal-content"><h3>FAQ</h3><p>Livraison en 30 min. Paiement cash ou carte.</p><button class="main-btn" onclick="closeOverlay('faqOverlay')">Fermer</button></div>
+  <div class="modal-content">
+    <h2 style="color:var(--blue);">FAQ</h2>
+    <p><strong>Délai ?</strong> 30 à 45 minutes.</p>
+    <p><strong>Annulation ?</strong> Possible avant préparation.</p>
+    <button class="main-btn" onclick="closeOverlay('faqOverlay')">Fermer</button>
+  </div>
 </div>
+
 <div id="aideOverlay" class="overlay hidden">
-  <div class="modal-content"><h3>Aide</h3><p>Besoin d'aide ? Utilisez le numéro WhatsApp pour un support direct.</p><button class="main-btn" onclick="closeOverlay('aideOverlay')">Fermer</button></div>
+  <div class="modal-content">
+    <h2 style="color:var(--blue);">Centre d'Aide</h2>
+    <p>Problème de paiement ? Contactez votre banque.</p>
+    <p>Commande non reçue ? Contactez le support WhatsApp.</p>
+    <button class="main-btn" onclick="closeOverlay('aideOverlay')">Retour</button>
+  </div>
 </div>
 
 <header>
   <div class="logo-box"><img src="logo.png" alt="CLICK.NJIK"></div>
-  <p>Fast food • Delivery • Quality</p>
+  <p>Qualité • Livraison • Rapidité</p>
 </header>
 
 <div class="restaurant-grid">
@@ -165,7 +176,7 @@ header { padding: 50px 20px 30px; }
 </div>
 
 <div id="menuDisplay" class="menu-box">
-  <h2 id="resTitle" class="menu-title">Menu</h2>
+  <h2 id="resTitle" style="color:var(--blue); border-bottom:2px solid var(--orange);">Menu</h2>
   <h3 style="color:var(--orange)">🍔 Food</h3>
   <div id="foodItems"></div>
   <h3 style="color:var(--orange); margin-top:20px;">🥤 Drinks</h3>
@@ -173,7 +184,12 @@ header { padding: 50px 20px 30px; }
   <button class="main-btn" style="margin-top:20px; font-size:14px;" onclick="document.getElementById('menuDisplay').style.display='none'">Fermer</button>
 </div>
 
-<div style="max-width:800px; margin:auto; padding:30px; background:rgba(255,255,255,0.05); border-radius:20px; border:1px solid var(--orange);">
+<div id="cartArea" style="max-width:800px; margin:40px auto; padding:30px; background:rgba(255,255,255,0.05); border-radius:20px; border:1px solid var(--orange);">
+    <h3>📋 Votre Panier</h3>
+    <div id="liveCartItems" style="text-align:left; margin-bottom:20px;">
+        <p style="text-align:center; opacity:0.5;">Le panier est vide</p>
+    </div>
+    <hr>
     <h3>Total: <span id="cartTotal">0</span> MAD</h3>
     <button class="main-btn" style="width:100%;" onclick="openPayment()">Payer</button>
 </div>
@@ -184,7 +200,6 @@ header { padding: 50px 20px 30px; }
     <button class="pill-btn">🥤 Drinks</button> <button class="pill-btn">🌯 Tacos</button>
     <button class="pill-btn">🍟 Snacks</button> <button class="pill-btn">🔥 Promotions</button>
     <button class="pill-btn">⭐ Best Sellers</button> <button class="pill-btn">📍 Near You</button>
-    <button class="pill-btn">🕒 Open Now</button> <button class="pill-btn">🚚 Delivery</button>
   </div>
 </section>
 
@@ -194,7 +209,7 @@ header { padding: 50px 20px 30px; }
       <h4>Liens utiles</h4>
       <button class="footer-btn" onclick="openOverlay('landingOverlay')">Accueil</button>
       <button class="footer-btn" onclick="window.scrollTo(0,0)">Menu</button>
-      <button class="footer-btn" onclick="showOrderList()">Commander</button>
+      <button class="footer-btn" onclick="showCommanderList()">Commander</button>
       <button class="footer-btn" onclick="openOverlay('contactOverlay')">Contact</button>
     </div>
     <div class="footer-box">
@@ -214,32 +229,26 @@ header { padding: 50px 20px 30px; }
 let cart = [];
 const data = {
   kfc: { 
-    name: "KFC", 
-    food: [{n:"Bucket 15pc",p:120},{n:"Zinger",p:45},{n:"Tower",p:52},{n:"Boxmaster",p:58},{n:"Wings 6pc",p:40},{n:"Colonel",p:42},{n:"Twister",p:38},{n:"Chicken Rice",p:45}],
+    food: [{n:"Bucket 15pc",p:120},{n:"Zinger",p:45},{n:"Tower",p:52},{n:"Wings 6pc",p:40},{n:"Colonel",p:42},{n:"Boxmaster",p:58},{n:"Twister",p:38},{n:"Crispy",p:45}],
     drinks: [{n:"Pepsi",p:12},{n:"7Up",p:12},{n:"Mirinda",p:12},{n:"Water",p:6},{n:"Iced Tea",p:15}]
   },
   mcdonalds: { 
-    name: "McDonald's", 
     food: [{n:"Big Mac",p:48},{n:"Grand Deluxe",p:65},{n:"Nuggets 9pc",p:42},{n:"McChicken",p:40},{n:"Big Tasty",p:70},{n:"Royal Cheese",p:55},{n:"Happy Meal",p:35},{n:"Filet-O-Fish",p:38}],
     drinks: [{n:"Coke",p:12},{n:"Fanta",p:12},{n:"McFlurry",p:30},{n:"Sundae",p:20},{n:"Orange Juice",p:15}]
   },
   starbucks: { 
-    name: "Starbucks", 
     food: [{n:"Muffin Choco",p:25},{n:"Cheese Panini",p:48},{n:"Cookie",p:22},{n:"Brownie",p:28},{n:"Croissant",p:20},{n:"Tuna Sandwich",p:45},{n:"Bagel",p:30},{n:"Blueberry Cake",p:32}],
     drinks: [{n:"Caramel Macchiato",p:45},{n:"Latte",p:35},{n:"Java Chip",p:50},{n:"Cold Brew",p:38},{n:"Frappuccino",p:52}]
   },
   burgerking: { 
-    name: "Burger King", 
     food: [{n:"Whopper",p:55},{n:"Steakhouse",p:72},{n:"Big King",p:48},{n:"Long Chicken",p:45},{n:"Crispy",p:42},{n:"Bacon Burger",p:60},{n:"Nuggets 10pc",p:35},{n:"Double Cheese",p:40}],
     drinks: [{n:"Coke",p:12},{n:"Onion Rings",p:25},{n:"King Fusion",p:30},{n:"Shake",p:32},{n:"Sprite",p:12}]
   },
   tacobell: { 
-    name: "Taco Bell", 
     food: [{n:"Crunchy Taco",p:25},{n:"Quesadilla",p:50},{n:"Burrito",p:45},{n:"Chalupa",p:52},{n:"Nachos",p:60},{n:"Soft Taco",p:28},{n:"Enchirito",p:42},{n:"Cheesy Melt",p:35}],
     drinks: [{n:"Mt Dew",p:15},{n:"Baja Blast",p:18},{n:"Tea",p:12},{n:"Cinnamon",p:18},{n:"Soda",p:12}]
   },
   wendys: { 
-    name: "Wendy's", 
     food: [{n:"Baconator",p:78},{n:"Dave Single",p:50},{n:"Spicy Chicken",p:55},{n:"Nuggets",p:42},{n:"Potato",p:30},{n:"Chili",p:28},{n:"Junior Burger",p:32},{n:"Double Bacon",p:65}],
     drinks: [{n:"Frosty Choco",p:25},{n:"Frosty Van",p:25},{n:"Dr Pepper",p:15},{n:"Fries",p:20},{n:"Root Beer",p:15}]
   }
@@ -250,28 +259,34 @@ function closeOverlay(id) { document.getElementById(id).classList.add('hidden');
 
 function showMenu(brand) {
   const res = data[brand];
-  document.getElementById("resTitle").innerText = res.name;
-  
-  const gen = (arr) => arr.map(i => `<div class="item"><span>${i.n} - ${i.p} MAD</span><button onclick="addToCart('${i.n}', ${i.p})" style="background:var(--success); color:white; border:none; padding:5px 10px; border-radius:10px; cursor:pointer;">Ajouter</button></div>`).join('');
-  
+  const gen = (arr) => arr.map(i => `<div class="item"><span>${i.n} - ${i.p} MAD</span><button onclick="addToCart('${i.n}', ${i.p})" style="background:var(--success); color:white; border:none; padding:8px 15px; border-radius:10px; cursor:pointer;">Ajouter</button></div>`).join('');
   document.getElementById("foodItems").innerHTML = gen(res.food);
   document.getElementById("drinkItems").innerHTML = gen(res.drinks);
   document.getElementById("menuDisplay").style.display = "block";
   window.scrollTo(0, document.getElementById('menuDisplay').offsetTop - 50);
 }
 
-function addToCart(n, p) { cart.push({n, p}); updateCart(); }
-
-function updateCart() {
-  const total = cart.reduce((sum, i) => sum + i.p, 0);
-  document.getElementById("cartTotal").innerText = total;
+function addToCart(n, p) {
+  cart.push({n, p});
+  updateCartUI();
 }
 
-function showOrderList() {
-  if(cart.length === 0) { alert("Le panier est vide!"); return; }
-  const list = document.getElementById("finalOrderItems");
+function updateCartUI() {
+  const list = document.getElementById("liveCartItems");
+  if(cart.length === 0) list.innerHTML = "<p style='text-align:center; opacity:0.5;'>Le panier est vide</p>";
+  else list.innerHTML = cart.map((i, idx) => `<div class="item">${i.n} - ${i.p} MAD <button onclick="removeItem(${idx})" style="color:red; background:none; border:none; cursor:pointer;">X</button></div>`).join('');
+  
+  const total = cart.reduce((sum, i) => sum + i.p, 0);
+  document.getElementById("cartTotal").innerText = total;
+  document.getElementById("payTotal").innerText = total;
+}
+
+function removeItem(idx) { cart.splice(idx, 1); updateCartUI(); }
+
+function showCommanderList() {
+  if(cart.length === 0) { alert("Votre panier est vide!"); return; }
+  const list = document.getElementById("orderListItems");
   list.innerHTML = cart.map(i => `<div class="item"><span>${i.n}</span><span>${i.p} MAD</span></div>`).join('');
-  document.getElementById("finalTotal").innerText = document.getElementById("cartTotal").innerText;
   openOverlay('orderListOverlay');
 }
 
