@@ -68,7 +68,7 @@ header {
 
 /* MENU */
 .menu-box {
-  max-width: 650px;
+  max-width: 700px;
   margin: 20px auto;
   background: linear-gradient(180deg, #ffffff, #f1f1f1);
   color: #222;
@@ -82,24 +82,17 @@ header {
   margin-top: 0;
 }
 
-/* MENU ITEM + ORDER BUTTON */
 .item {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   margin: 14px 0;
-  padding-bottom: 8px;
   border-bottom: 1px dashed #ccc;
-  gap: 10px;
+  padding-bottom: 8px;
 }
 
 .item-info {
   text-align: left;
-}
-
-.item-info span {
-  display: block;
-  font-weight: 600;
 }
 
 .price {
@@ -107,37 +100,29 @@ header {
   opacity: 0.8;
 }
 
-/* ORDER BUTTON */
 .order-btn {
   padding: 8px 18px;
   border-radius: 20px;
   border: none;
   background: var(--orange);
-  color: #111;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.order-btn:hover {
-  transform: scale(1.05);
-  background: #ffb347;
-}
-
-/* EXPLORE SECTION */
+/* EXPLORE */
 .explore {
   margin-top: 80px;
-  padding: 60px 20px;
+  padding: 70px 20px;
   background: linear-gradient(180deg, #0b1a2a, #07101c);
 }
 
 .explore h2 {
-  font-size: 32px;
+  font-size: 36px;
 }
 
 .explore-group {
-  max-width: 900px;
-  margin: 25px auto;
+  max-width: 1000px;
+  margin: 30px auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -145,7 +130,7 @@ header {
 }
 
 .pill-btn {
-  padding: 12px 22px;
+  padding: 14px 26px;
   border-radius: 30px;
   background: white;
   color: #0b1a2a;
@@ -157,13 +142,35 @@ header {
 /* FOOTER */
 .big-footer {
   background: #050c16;
-  padding: 60px 30px 30px;
+  padding: 60px 30px;
+}
+
+.footer-grid {
+  max-width: 1000px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.footer-box h4 {
+  margin-bottom: 15px;
+}
+
+.footer-btn {
+  display: block;
+  margin: 6px auto;
+  background: none;
+  border: none;
+  color: white;
+  opacity: 0.85;
+  cursor: pointer;
 }
 
 .footer-legal {
-  margin-top: 30px;
+  margin-top: 40px;
   font-size: 13px;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 </style>
 </head>
@@ -172,7 +179,7 @@ header {
 
 <header>
   <div class="logo-box">
-    <img src="logo.png" alt="CLICK.NJIK Logo">
+    <img src="logo.png" alt="CLICK.NJIK">
   </div>
   <p>Fast food • Delivery • Quality</p>
 </header>
@@ -182,104 +189,29 @@ header {
   <button class="main-btn" onclick="toggleMenu('drinkMenu')">🥤 DRINKS</button>
 </div>
 
-<!-- FOOD MENU (EXTENDED) -->
+<!-- FOOD MENU -->
 <div id="foodMenu" class="menu-box">
   <h3>Food Menu</h3>
-
-  <div class="item">
-    <div class="item-info">
-      <span>Classic Burger</span>
-      <span class="price">35 MAD</span>
-    </div>
-    <button class="order-btn">Order</button>
-  </div>
-
-  <div class="item">
-    <div class="item-info">
-      <span>Cheese Burger</span>
-      <span class="price">38 MAD</span>
-    </div>
-    <button class="order-btn">Order</button>
-  </div>
-
-  <div class="item">
-    <div class="item-info">
-      <span>Double Burger</span>
-      <span class="price">45 MAD</span>
-    </div>
-    <button class="order-btn">Order</button>
-  </div>
-
-  <div class="item">
-    <div class="item-info">
-      <span>Chicken Burger</span>
-      <span class="price">40 MAD</span>
-    </div>
-    <button class="order-btn">Order</button>
-  </div>
-
-  <div class="item">
-    <div class="item-info">
-      <span>Pizza Margherita</span>
-      <span class="price">45 MAD</span>
-    </div>
-    <button class="order-btn">Order</button>
-  </div>
-
-  <div class="item">
-    <div class="item-info">
-      <span>Pizza Chicken</span>
-      <span class="price">50 MAD</span>
-    </div>
-    <button class="order-btn">Order</button>
-  </div>
-
-  <div class="item">
-    <div class="item-info">
-      <span>Panini Chicken</span>
-      <span class="price">30 MAD</span>
-    </div>
-    <button class="order-btn">Order</button>
-  </div>
-
-  <div class="item">
-    <div class="item-info">
-      <span>Nuggets (6 pcs)</span>
-      <span class="price">25 MAD</span>
-    </div>
-    <button class="order-btn">Order</button>
-  </div>
-
-  <div class="item">
-    <div class="item-info">
-      <span>Fries (Large)</span>
-      <span class="price">20 MAD</span>
-    </div>
-    <button class="order-btn">Order</button>
-  </div>
+  <div class="item"><div class="item-info">Classic Burger<br><span class="price">35 MAD</span></div><button class="order-btn">Order</button></div>
+  <div class="item"><div class="item-info">Cheese Burger<br><span class="price">38 MAD</span></div><button class="order-btn">Order</button></div>
+  <div class="item"><div class="item-info">Double Burger<br><span class="price">45 MAD</span></div><button class="order-btn">Order</button></div>
+  <div class="item"><div class="item-info">Chicken Burger<br><span class="price">40 MAD</span></div><button class="order-btn">Order</button></div>
+  <div class="item"><div class="item-info">Pizza Chicken<br><span class="price">50 MAD</span></div><button class="order-btn">Order</button></div>
+  <div class="item"><div class="item-info">Fries Large<br><span class="price">20 MAD</span></div><button class="order-btn">Order</button></div>
 </div>
 
-<!-- DRINKS -->
+<!-- DRINK MENU (EXTENDED) -->
 <div id="drinkMenu" class="menu-box">
   <h3>Drinks Menu</h3>
-
-  <div class="item">
-    <div class="item-info">
-      <span>Coca-Cola</span>
-      <span class="price">10 MAD</span>
-    </div>
-    <button class="order-btn">Order</button>
-  </div>
-
-  <div class="item">
-    <div class="item-info">
-      <span>Milkshake</span>
-      <span class="price">18 MAD</span>
-    </div>
-    <button class="order-btn">Order</button>
-  </div>
+  <div class="item"><div class="item-info">Coca-Cola<br><span class="price">10 MAD</span></div><button class="order-btn">Order</button></div>
+  <div class="item"><div class="item-info">Sprite<br><span class="price">10 MAD</span></div><button class="order-btn">Order</button></div>
+  <div class="item"><div class="item-info">Fanta<br><span class="price">10 MAD</span></div><button class="order-btn">Order</button></div>
+  <div class="item"><div class="item-info">Water<br><span class="price">6 MAD</span></div><button class="order-btn">Order</button></div>
+  <div class="item"><div class="item-info">Milkshake Chocolate<br><span class="price">18 MAD</span></div><button class="order-btn">Order</button></div>
+  <div class="item"><div class="item-info">Milkshake Vanilla<br><span class="price">18 MAD</span></div><button class="order-btn">Order</button></div>
 </div>
 
+<!-- EXPLORE -->
 <section class="explore">
   <h2>Explore CLICK.NJIK</h2>
   <div class="explore-group">
@@ -288,10 +220,44 @@ header {
     <button class="pill-btn">Marrakech</button>
     <button class="pill-btn">Tanger</button>
     <button class="pill-btn">Agadir</button>
+    <button class="pill-btn">Fès</button>
+    <button class="pill-btn">Oujda</button>
+    <button class="pill-btn">Kenitra</button>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="big-footer">
+  <div class="footer-grid">
+    <div class="footer-box">
+      <h4>Liens utiles</h4>
+      <button class="footer-btn">Accueil</button>
+      <button class="footer-btn">Menu</button>
+      <button class="footer-btn">Commander</button>
+    </div>
+
+    <div class="footer-box">
+      <h4>Nous suivre</h4>
+      <button class="footer-btn">Facebook</button>
+      <button class="footer-btn">Instagram</button>
+      <button class="footer-btn">TikTok</button>
+    </div>
+
+    <div class="footer-box">
+      <h4>FAQ</h4>
+      <button class="footer-btn">Livraison</button>
+      <button class="footer-btn">Paiement</button>
+      <button class="footer-btn">Support</button>
+    </div>
+
+    <div class="footer-box">
+      <h4>Contact</h4>
+      <button class="footer-btn">Email</button>
+      <button class="footer-btn">Téléphone</button>
+      <button class="footer-btn">Adresse</button>
+    </div>
+  </div>
+
   <div class="footer-legal">
     © 2026 CLICK.NJIK — All rights reserved
   </div>
@@ -299,10 +265,8 @@ header {
 
 <script>
 function toggleMenu(menuId) {
-  document.getElementById("foodMenu").style.display =
-    menuId === "foodMenu" ? "block" : "none";
-  document.getElementById("drinkMenu").style.display =
-    menuId === "drinkMenu" ? "block" : "none";
+  document.getElementById("foodMenu").style.display = menuId === "foodMenu" ? "block" : "none";
+  document.getElementById("drinkMenu").style.display = menuId === "drinkMenu" ? "block" : "none";
 }
 </script>
 
