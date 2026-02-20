@@ -26,7 +26,7 @@ header {
   padding: 50px 20px 30px;
 }
 
-/* LOGO BADGE */
+/* ===== LOGO BADGE ===== */
 .logo-box {
   width: 200px;
   height: 200px;
@@ -41,8 +41,15 @@ header {
     inset 0 0 20px rgba(0,0,0,0.6);
 }
 
+/* ✅ FIXED LOGO (CIRCULAR) */
 .logo-box img {
-  width: 140px;
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 10px;
+  background: radial-gradient(circle, #1c3d63, #0a1b2f);
+  box-shadow: inset 0 0 12px rgba(255,255,255,0.15);
 }
 
 /* TAGLINE */
@@ -125,20 +132,17 @@ footer {
 <body>
 
 <header>
-  <!-- CREATIVE LOGO -->
   <div class="logo-box">
     <img src="logo.png" alt="CLICK.NJIK Logo">
   </div>
   <p>Fast food • Delivery • Quality</p>
 </header>
 
-<!-- BUTTONS -->
 <div class="buttons">
   <button class="main-btn" onclick="toggleMenu('foodMenu')">🍔 FOOD</button>
   <button class="main-btn" onclick="toggleMenu('drinkMenu')">🥤 DRINKS</button>
 </div>
 
-<!-- FOOD MENU -->
 <div id="foodMenu" class="menu-box">
   <h3>Food Menu</h3>
   <div class="item"><span>Classic Burger</span><span>35 MAD</span></div>
@@ -154,7 +158,6 @@ footer {
   <div class="item"><span>Nuggets (6 pcs)</span><span>25 MAD</span></div>
 </div>
 
-<!-- DRINKS MENU -->
 <div id="drinkMenu" class="menu-box">
   <h3>Drinks Menu</h3>
   <div class="item"><span>Coca-Cola</span><span>10 MAD</span></div>
