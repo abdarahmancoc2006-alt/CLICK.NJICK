@@ -10,7 +10,6 @@
   --dark-blue: #0b1a2a;
   --blue: #122a45;
   --orange: #ff8c1a;
-  --light: #f4f6f8;
 }
 
 body {
@@ -21,12 +20,11 @@ body {
   text-align: center;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header {
   padding: 50px 20px 30px;
 }
 
-/* ===== LOGO ===== */
 .logo-box {
   width: 200px;
   height: 200px;
@@ -36,9 +34,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow:
-    0 0 25px rgba(255,140,26,0.5),
-    inset 0 0 20px rgba(0,0,0,0.6);
+  box-shadow: 0 0 25px rgba(255,140,26,0.5);
 }
 
 .logo-box img {
@@ -50,7 +46,7 @@ header {
   background: radial-gradient(circle, #1c3d63, #0a1b2f);
 }
 
-/* ===== BUTTONS ===== */
+/* MAIN BUTTONS */
 .buttons {
   display: flex;
   justify-content: center;
@@ -70,9 +66,9 @@ header {
   cursor: pointer;
 }
 
-/* ===== MENU ===== */
+/* MENU */
 .menu-box {
-  max-width: 500px;
+  max-width: 650px;
   margin: 20px auto;
   background: linear-gradient(180deg, #ffffff, #f1f1f1);
   color: #222;
@@ -81,14 +77,54 @@ header {
   display: none;
 }
 
-.item {
-  display: flex;
-  justify-content: space-between;
-  margin: 12px 0;
-  border-bottom: 1px dashed #ccc;
+.menu-box h3 {
+  color: var(--blue);
+  margin-top: 0;
 }
 
-/* ===== NEW EXPLORE SECTION ===== */
+/* MENU ITEM + ORDER BUTTON */
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #ccc;
+  gap: 10px;
+}
+
+.item-info {
+  text-align: left;
+}
+
+.item-info span {
+  display: block;
+  font-weight: 600;
+}
+
+.price {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ORDER BUTTON */
+.order-btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  background: var(--orange);
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.order-btn:hover {
+  transform: scale(1.05);
+  background: #ffb347;
+}
+
+/* EXPLORE SECTION */
 .explore {
   margin-top: 80px;
   padding: 60px 20px;
@@ -97,17 +133,11 @@ header {
 
 .explore h2 {
   font-size: 32px;
-  margin-bottom: 10px;
-}
-
-.explore p {
-  opacity: 0.8;
-  margin-bottom: 30px;
 }
 
 .explore-group {
   max-width: 900px;
-  margin: 20px auto;
+  margin: 25px auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -117,49 +147,21 @@ header {
 .pill-btn {
   padding: 12px 22px;
   border-radius: 30px;
-  background: #ffffff;
+  background: white;
   color: #0b1a2a;
   border: none;
-  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-.pill-btn:hover {
-  background: var(--orange);
-  transform: translateY(-3px);
-}
-
-/* ===== BIG FOOTER ===== */
+/* FOOTER */
 .big-footer {
   background: #050c16;
   padding: 60px 30px 30px;
-  margin-top: 60px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 40px;
-  max-width: 1200px;
-  margin: auto;
-  text-align: left;
-}
-
-.footer-col h4 {
-  margin-bottom: 15px;
-}
-
-.footer-col p {
-  margin: 8px 0;
-  opacity: 0.8;
 }
 
 .footer-legal {
-  border-top: 1px solid #222;
-  margin-top: 40px;
-  padding-top: 20px;
+  margin-top: 30px;
   font-size: 13px;
   opacity: 0.7;
 }
@@ -180,21 +182,106 @@ header {
   <button class="main-btn" onclick="toggleMenu('drinkMenu')">🥤 DRINKS</button>
 </div>
 
+<!-- FOOD MENU (EXTENDED) -->
 <div id="foodMenu" class="menu-box">
-  <div class="item"><span>Classic Burger</span><span>35 MAD</span></div>
-  <div class="item"><span>Pizza Chicken</span><span>50 MAD</span></div>
+  <h3>Food Menu</h3>
+
+  <div class="item">
+    <div class="item-info">
+      <span>Classic Burger</span>
+      <span class="price">35 MAD</span>
+    </div>
+    <button class="order-btn">Order</button>
+  </div>
+
+  <div class="item">
+    <div class="item-info">
+      <span>Cheese Burger</span>
+      <span class="price">38 MAD</span>
+    </div>
+    <button class="order-btn">Order</button>
+  </div>
+
+  <div class="item">
+    <div class="item-info">
+      <span>Double Burger</span>
+      <span class="price">45 MAD</span>
+    </div>
+    <button class="order-btn">Order</button>
+  </div>
+
+  <div class="item">
+    <div class="item-info">
+      <span>Chicken Burger</span>
+      <span class="price">40 MAD</span>
+    </div>
+    <button class="order-btn">Order</button>
+  </div>
+
+  <div class="item">
+    <div class="item-info">
+      <span>Pizza Margherita</span>
+      <span class="price">45 MAD</span>
+    </div>
+    <button class="order-btn">Order</button>
+  </div>
+
+  <div class="item">
+    <div class="item-info">
+      <span>Pizza Chicken</span>
+      <span class="price">50 MAD</span>
+    </div>
+    <button class="order-btn">Order</button>
+  </div>
+
+  <div class="item">
+    <div class="item-info">
+      <span>Panini Chicken</span>
+      <span class="price">30 MAD</span>
+    </div>
+    <button class="order-btn">Order</button>
+  </div>
+
+  <div class="item">
+    <div class="item-info">
+      <span>Nuggets (6 pcs)</span>
+      <span class="price">25 MAD</span>
+    </div>
+    <button class="order-btn">Order</button>
+  </div>
+
+  <div class="item">
+    <div class="item-info">
+      <span>Fries (Large)</span>
+      <span class="price">20 MAD</span>
+    </div>
+    <button class="order-btn">Order</button>
+  </div>
 </div>
 
+<!-- DRINKS -->
 <div id="drinkMenu" class="menu-box">
-  <div class="item"><span>Coca-Cola</span><span>10 MAD</span></div>
-  <div class="item"><span>Milkshake</span><span>18 MAD</span></div>
+  <h3>Drinks Menu</h3>
+
+  <div class="item">
+    <div class="item-info">
+      <span>Coca-Cola</span>
+      <span class="price">10 MAD</span>
+    </div>
+    <button class="order-btn">Order</button>
+  </div>
+
+  <div class="item">
+    <div class="item-info">
+      <span>Milkshake</span>
+      <span class="price">18 MAD</span>
+    </div>
+    <button class="order-btn">Order</button>
+  </div>
 </div>
 
-<!-- ✅ NEW SECTION ADDED -->
 <section class="explore">
   <h2>Explore CLICK.NJIK</h2>
-  <p>Popular cities & categories</p>
-
   <div class="explore-group">
     <button class="pill-btn">Casablanca</button>
     <button class="pill-btn">Rabat</button>
@@ -202,35 +289,9 @@ header {
     <button class="pill-btn">Tanger</button>
     <button class="pill-btn">Agadir</button>
   </div>
-
-  <div class="explore-group">
-    <button class="pill-btn">🍕 Pizza</button>
-    <button class="pill-btn">🍔 Burgers</button>
-    <button class="pill-btn">🥘 Marocain</button>
-    <button class="pill-btn">☕ Breakfast</button>
-    <button class="pill-btn">💊 Parapharmacie</button>
-  </div>
 </section>
 
 <footer class="big-footer">
-  <div class="footer-grid">
-    <div class="footer-col">
-      <h4>Opportunités</h4>
-      <p>Emploi</p>
-      <p>Partenaires</p>
-    </div>
-    <div class="footer-col">
-      <h4>Liens utiles</h4>
-      <p>FAQ</p>
-      <p>Contact</p>
-    </div>
-    <div class="footer-col">
-      <h4>Suivez-nous</h4>
-      <p>Instagram</p>
-      <p>TikTok</p>
-    </div>
-  </div>
-
   <div class="footer-legal">
     © 2026 CLICK.NJIK — All rights reserved
   </div>
