@@ -34,6 +34,23 @@ body {
   transition: background 0.5s ease;
 }
 
+/* --- DISCOUNT BADGE --- */
+#discountBadge {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: var(--success);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  z-index: 10000;
+  display: none;
+  box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0% {transform: scale(1);} 50% {transform: scale(1.1);} 100% {transform: scale(1);} }
+
 /* --- NEW GREEN MESSAGE STYLE --- */
 #greenAlert {
   position: fixed;
@@ -133,6 +150,7 @@ body {
 
 <body>
 
+<div id="discountBadge"></div>
 <div id="greenAlert">Votre Panier est vide !! Choisir un repas</div>
 
 <div id="landingOverlay" class="overlay">
@@ -336,6 +354,7 @@ body {
 
 <script>
 let cart = [];
+let currentDiscount = 0;
 const data = {
   kfc: { 
     food:[{n:"Bucket 15pc",p:120},{n:"Zinger",p:45},{n:"Boxmaster",p:55},{n:"Twister",p:38},{n:"Colonel Burger",p:42},{n:"Wings 6pc",p:40},{n:"Tower Burger",p:52},{n:"Rice Box",p:45}],
@@ -363,6 +382,16 @@ const data = {
   }
 };
 
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playSound(freq, type, dur) {
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type; osc.frequency.value = freq;
+  osc.connect(gain); gain.connect(audioCtx.destination);
+  osc.start(); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + dur);
+  osc.stop(audioCtx.currentTime + dur);
+}
+
 function openOverlay(id) { document.getElementById(id).classList.remove('hidden'); }
 function closeOverlay(id) { document.getElementById(id).classList.add('hidden'); }
 function toggleMidnight() { document.body.classList.toggle('midnight-mode'); }
@@ -378,7 +407,10 @@ function clearCart() { cart = []; updateCartUI(); }
 
 function showMenu(brand) {
   const res = data[brand];
-  const gen = (arr) => arr.map(i => `<div class="item"><span>${i.n} - ${i.p} MAD</span><button onclick="addToCart('${i.n}', ${i.p})" style="background:var(--success); color:white; border:none; padding:8px 15px; border-radius:10px; cursor:pointer;">Ajouter</button></div>`).join('');
+  const gen = (arr) => arr.map(i => {
+    let finalPrice = currentDiscount > 0 ? (i.p * (1 - currentDiscount/100)).toFixed(0) : i.p;
+    return `<div class="item"><span>${i.n} - ${finalPrice} MAD ${currentDiscount > 0 ? '<small style="text-decoration:line-through; opacity:0.5;">'+i.p+'</small>' : ''}</span><button onclick="addToCart('${i.n}', ${finalPrice})" style="background:var(--success); color:white; border:none; padding:8px 15px; border-radius:10px; cursor:pointer;">Ajouter</button></div>`;
+  }).join('');
   document.getElementById("resTitle").innerText = brand.toUpperCase();
   document.getElementById("foodItems").innerHTML = gen(res.food);
   document.getElementById("drinkItems").innerHTML = gen(res.drinks);
@@ -388,7 +420,8 @@ function showMenu(brand) {
 
 function openSnacks() {
     const snackNames = ["Frites Maison 🍟", "Mozzarella Sticks 🧀", "Onion Rings 🧅", "Nuggets Chicken 🍗", "Nachos Salsa 🍅", "Potato Wedges 🥔", "Spring Rolls 🥗", "Calamari Rings 🦑", "Mini Pizzas 🍕", "Cheese Balls 🧀", "Popcorn Chicken 🍿", "Hot Wings 🌶️", "Tacos Bite 🌮", "Garlic Bread 🧄", "Mini Burgers 🍔", "Corn Dogs 🌭", "Sweet Potato Fries 🍠", "Shrimp Tempura 🍤", "Empanadas 🥟", "Falafel Bites 🧆"];
-    let items = snackNames.map(s => `<div class="item"><span>${s}</span><span>20 MAD</span><button onclick="addToCart('${s}', 20)" style="background:var(--success); color:white; border:none; padding:5px; border-radius:5px;">+</button></div>`).join('');
+    let price = currentDiscount > 0 ? (20 * (1 - currentDiscount/100)).toFixed(0) : 20;
+    let items = snackNames.map(s => `<div class="item"><span>${s}</span><span>${price} MAD</span><button onclick="addToCart('${s}', ${price})" style="background:var(--success); color:white; border:none; padding:5px; border-radius:5px;">+</button></div>`).join('');
     document.getElementById("snacksList").innerHTML = items;
     openOverlay('snacksOverlay');
 }
@@ -399,7 +432,7 @@ function openBestSellers() {
     openOverlay('bestOverlay');
 }
 
-function addToCart(n, p) { cart.push({n, p}); updateCartUI(); }
+function addToCart(n, p) { cart.push({n, p: parseFloat(p)}); updateCartUI(); }
 function updateCartUI() {
     const list = document.getElementById("liveCartItems");
     if(cart.length === 0) list.innerHTML = "<p style='text-align:center; opacity:0.5;'>Le panier est vide</p>";
@@ -433,7 +466,7 @@ function processPayment() {
 }
 
 /* --- WHEEL LOGIC --- */
-const prizes = ["-10% Off", "Free Soda", "-5% Off", "Free Fries", "No Luck", "Free Cookie"];
+const prizes = ["10% Off", "Free Soda", "5% Off", "Free Fries", "No Luck", "Free Cookie"];
 let currentRotation = 0;
 
 function drawWheel() {
@@ -459,31 +492,61 @@ function drawWheel() {
 }
 
 function spinWheel() {
+    const lastSpin = localStorage.getItem('lastWheelSpin');
+    const now = new Date().getTime();
+    if (lastSpin && now - lastSpin < 86400000) {
+        const timeLeft = Math.ceil((86400000 - (now - lastSpin)) / 3600000);
+        alert("Vous avez déjà tourné la roue ! Revenez dans " + timeLeft + " heures.");
+        return;
+    }
+
     const wheel = document.getElementById('wheelCanvas');
     const btn = document.getElementById('spinBtn');
     btn.disabled = true;
     
-    // Fast, smooth rotation (5 to 10 full spins + random)
-    const extraSpins = (Math.floor(Math.random() * 5) + 5) * 360;
+    const extraSpins = (Math.floor(Math.random() * 5) + 8) * 360;
     const randomStop = Math.floor(Math.random() * 360);
     currentRotation += extraSpins + randomStop;
     
     wheel.style.transform = `rotate(${currentRotation}deg)`;
 
+    // Tick sounds during spin
+    let soundInterval = setInterval(() => playSound(400, 'sine', 0.05), 150);
+    setTimeout(() => clearInterval(soundInterval), 3500);
+
     setTimeout(() => {
         btn.disabled = false;
-        // Calculate the winning index
-        // The pointer is at the top (270 degrees in canvas terms)
+        localStorage.setItem('lastWheelSpin', new Date().getTime());
         const actualDeg = currentRotation % 360;
         const prizeIndex = Math.floor(((360 - actualDeg + 270) % 360) / (360 / prizes.length));
         const win = prizes[prizeIndex];
 
         if(win === "No Luck") {
             showGreenMessage("Better luck next time ☹️");
+            playSound(200, 'square', 0.3);
         } else {
             showGreenMessage("You won " + win + " 😄");
+            playSound(600, 'triangle', 0.1); playSound(800, 'triangle', 0.2);
+            
+            if(win.includes("5% Off")) applyDiscount(5);
+            if(win.includes("10% Off")) applyDiscount(10);
         }
     }, 4000);
+}
+
+function applyDiscount(val) {
+    currentDiscount = val;
+    const badge = document.getElementById('discountBadge');
+    badge.innerText = val + "% OFF";
+    badge.style.display = 'block';
+    
+    // Update existing cart items
+    cart = cart.map(item => ({...item, p: parseFloat((item.p * (1 - val/100)).toFixed(0))}));
+    updateCartUI();
+    
+    // Refresh menu if open
+    const title = document.getElementById("resTitle").innerText;
+    if(title !== "MENU") showMenu(title.toLowerCase());
 }
 
 function updateTimers() {
