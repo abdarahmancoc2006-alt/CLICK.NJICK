@@ -211,9 +211,23 @@ body {
 </div>
 
 <div id="snacksOverlay" class="overlay hidden"><div class="modal-content"><h2 style="color:var(--blue)">Nos Snacks</h2><div class="scroll-area" id="snacksList"></div><button class="main-btn" style="width:100%;" onclick="closeOverlay('snacksOverlay')">Fermer</button></div></div>
-<div id="promoOverlay" class="overlay hidden"><div class="modal-content"><h2 style="color:var(--blue)">🔥 Promotions</h2><div class="scroll-area"><div class="promo-card"><p><b>Welcome Deal 🎁</b> -50% Off<br>End in: <span style="color:red">02:45:10</span></p></div><h3 style="color:var(--blue)">Upcoming</h3><p>📅 Feb 25: Taco Fest</p></div><button class="main-btn" style="width:100%;" onclick="closeOverlay('promoOverlay')">Fermer</button></div></div>
+<div id="promoOverlay" class="overlay hidden">
+    <div class="modal-content">
+        <h2 style="color:var(--blue)">🔥 Promotions</h2>
+        <div class="scroll-area">
+            <div class="promo-card">
+                <p><b>Welcome Deal 🎁</b> -50% Off<br>End in: <span style="color:red" class="timer" data-time="2026-03-01T00:00:00">--:--:--:--</span></p>
+            </div>
+            <div class="promo-card">
+                <p><b>Weekend Special 🍕</b> Buy 1 Get 1<br>End in: <span style="color:red" class="timer" data-time="2026-02-28T23:59:59">--:--:--:--</span></p>
+            </div>
+            <h3 style="color:var(--blue)">Upcoming</h3>
+            <p>📅 Feb 25: Taco Fest</p>
+        </div>
+        <button class="main-btn" style="width:100%;" onclick="closeOverlay('promoOverlay')">Fermer</button>
+    </div>
+</div>
 <div id="bestOverlay" class="overlay hidden"><div class="modal-content"><h2 style="color:var(--blue)">⭐ Best Sellers</h2><div class="scroll-area" id="bestSellersContent"></div><button class="main-btn" style="width:100%;" onclick="closeOverlay('bestOverlay')">Fermer</button></div></div>
-<div id="nearOverlay" class="overlay hidden"><div class="modal-content"><h2 style="color:var(--blue)">📍 Distance Search</h2><div class="scroll-area"><h4 style="color:var(--orange)">20 km Away</h4><p>KFC Central, McDonald's North</p><h4 style="color:var(--orange)">35 km Away</h4><p>Burger King Mall, Starbucks East</p><h4 style="color:var(--orange)">50+ km Away</h4><p>Wendy's Outpost</p></div><button class="main-btn" style="width:100%;" onclick="closeOverlay('nearOverlay')">Fermer</button></div></div>
 
 <header>
   <div class="logo-box"><img src="logo.png" alt="CLICK.NJIK"></div>
@@ -255,7 +269,6 @@ body {
     <button class="pill-btn" onclick="openSnacks()">🍟 Snacks</button> 
     <button class="pill-btn" onclick="openOverlay('promoOverlay')">🔥 Promotions</button>
     <button class="pill-btn" onclick="openBestSellers()">⭐ Best Sellers</button> 
-    <button class="pill-btn" onclick="openOverlay('nearOverlay')">📍 Near You</button>
   </div>
 </section>
 
@@ -313,14 +326,12 @@ const data = {
 function openOverlay(id) { document.getElementById(id).classList.remove('hidden'); }
 function closeOverlay(id) { document.getElementById(id).classList.add('hidden'); }
 
-// NEW FUNCTION FOR GREEN MESSAGE
 function showGreenMessage() {
   const el = document.getElementById('greenAlert');
   el.style.display = 'block';
   setTimeout(() => { el.style.display = 'none'; }, 3000);
 }
 
-// NEW FUNCTION TO CLEAR CART
 function clearCart() {
   cart = [];
   updateCartUI();
@@ -345,11 +356,13 @@ function openSnacks() {
 
 function openBestSellers() {
     const items = [
-        {n:"1. Big Mac (McDo)", d:"Popular"}, {n:"2. Bucket 15pc (KFC)", d:"Hot"}, 
-        {n:"3. Caramel Macchiato", d:"Classic"}, {n:"4. Whopper (BK)", d:"Top Seller"},
-        {n:"5. Crunchy Taco", d:"Legendary"}
+        {n:"1. Big Mac (McDo)", o: Math.floor(Math.random() * 500) + 1200}, 
+        {n:"2. Bucket 15pc (KFC)", o: Math.floor(Math.random() * 500) + 900}, 
+        {n:"3. Caramel Macchiato", o: Math.floor(Math.random() * 500) + 800}, 
+        {n:"4. Whopper (BK)", o: Math.floor(Math.random() * 500) + 750},
+        {n:"5. Crunchy Taco", o: Math.floor(Math.random() * 500) + 600}
     ];
-    document.getElementById("bestSellersContent").innerHTML = items.map(i => `<div class="item"><span>${i.n}</span><span>${i.d}</span></div>`).join('');
+    document.getElementById("bestSellersContent").innerHTML = items.map(i => `<div class="item"><span>${i.n}</span><span style="color:var(--orange)">${i.o} Commande(s)</span></div>`).join('');
     openOverlay('bestOverlay');
 }
 
@@ -377,6 +390,30 @@ function showCommanderList() {
 }
 
 function openPayment() { if(cart.length === 0) showGreenMessage(); else openOverlay('paymentOverlay'); }
+
+// TIMER LOGIC
+function updateTimers() {
+    const timers = document.querySelectorAll('.timer');
+    timers.forEach(timer => {
+        const target = new Date(timer.getAttribute('data-time')).getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
+
+        if (diff <= 0) {
+            timer.innerText = "EXPIRED";
+            return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        timer.innerText = `${d}d ${h.toString().padStart(2, '0')}h ${m.toString().padStart(2, '0')}m ${s.toString().padStart(2, '0')}s`;
+    });
+}
+setInterval(updateTimers, 1000);
+updateTimers();
 </script>
 
 </body>
