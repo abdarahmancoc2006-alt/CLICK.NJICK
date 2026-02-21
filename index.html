@@ -275,21 +275,21 @@ body {
 <footer class="big-footer">
   <div class="footer-grid">
     <div class="footer-box">
-      <h4>Liens utiles</h4>
-      <button class="footer-btn" onclick="openOverlay('landingOverlay')">Accueil</button>
-      <button class="footer-btn" onclick="window.scrollTo(0,0)">Menu</button>
-      <button class="footer-btn" onclick="showCommanderList()">Commander</button>
-      <button class="footer-btn" onclick="openOverlay('contactOverlay')">Contact</button>
+      <h4>🏠 Liens utiles</h4>
+      <button class="footer-btn" onclick="openOverlay('landingOverlay')">🏠 Accueil</button>
+      <button class="footer-btn" onclick="window.scrollTo(0,0)">🍴 Menu</button>
+      <button class="footer-btn" onclick="showCommanderList()">🛒 Commander</button>
+      <button class="footer-btn" onclick="openOverlay('contactOverlay')">📞 Contact</button>
     </div>
     <div class="footer-box">
-      <h4>Suivez-nous</h4>
-      <a href="https://www.instagram.com/clicknjik?utm_source=qr&igsh=MXJqOHEzbXJtYWx6eA==" target="_blank" class="footer-btn">Instagram</a>
-      <a href="https://www.tiktok.com/@clicknjik?_r=1&_t=ZS-945haLVtnsY" target="_blank" class="footer-btn">TikTok</a>
+      <h4>📱 Suivez-nous</h4>
+      <a href="https://www.instagram.com/clicknjik?utm_source=qr&igsh=MXJqOHEzbXJtYWx6eA==" target="_blank" class="footer-btn">📸 Instagram</a>
+      <a href="https://www.tiktok.com/@clicknjik?_r=1&_t=ZS-945haLVtnsY" target="_blank" class="footer-btn">🎬 TikTok</a>
     </div>
     <div class="footer-box">
-      <h4>Aide</h4>
-      <button class="footer-btn" onclick="openOverlay('faqOverlay')">FAQ</button>
-      <button class="footer-btn" onclick="openOverlay('aideOverlay')">Support</button>
+      <h4>❓ Aide</h4>
+      <button class="footer-btn" onclick="openOverlay('faqOverlay')">💡 FAQ</button>
+      <button class="footer-btn" onclick="openOverlay('aideOverlay')">🛠️ Support</button>
     </div>
   </div>
 </footer>
@@ -348,8 +348,17 @@ function showMenu(brand) {
 }
 
 function openSnacks() {
+    const snackNames = [
+        "Frites Maison 🍟", "Mozzarella Sticks 🧀", "Onion Rings 🧅", "Nuggets Chicken 🍗", 
+        "Nachos Salsa 🍅", "Potato Wedges 🥔", "Spring Rolls 🥗", "Calamari Rings 🦑",
+        "Mini Pizzas 🍕", "Cheese Balls 🧀", "Popcorn Chicken 🍿", "Hot Wings 🌶️",
+        "Tacos Bite 🌮", "Garlic Bread 🧄", "Mini Burgers 🍔", "Corn Dogs 🌭",
+        "Sweet Potato Fries 🍠", "Shrimp Tempura 🍤", "Empanadas 🥟", "Falafel Bites 🧆"
+    ];
     let items = "";
-    for(let i=1; i<=20; i++) items += `<div class="item"><span>Snack Combo #${i}</span><span>20 MAD</span><button onclick="addToCart('Snack ${i}', 20)" style="background:var(--success); color:white; border:none; padding:5px; border-radius:5px;">+</button></div>`;
+    for(let i=0; i<snackNames.length; i++) {
+        items += `<div class="item"><span>${snackNames[i]}</span><span>20 MAD</span><button onclick="addToCart('${snackNames[i]}', 20)" style="background:var(--success); color:white; border:none; padding:5px; border-radius:5px;">+</button></div>`;
+    }
     document.getElementById("snacksList").innerHTML = items;
     openOverlay('snacksOverlay');
 }
