@@ -214,6 +214,7 @@ body {
 <div id="wheelOverlay" class="overlay hidden">
   <div class="modal-content" style="text-align:center; position:relative;">
     <h2 style="color:var(--blue)">Lucky Bite Wheel 🎡</h2>
+    <div id="wheelCountdown" style="color:red; font-weight:bold; margin-bottom:10px;"></div>
     <div class="wheel-pointer"></div>
     <canvas id="wheelCanvas" width="300" height="300"></canvas>
     <br><br>
@@ -326,7 +327,7 @@ body {
     <button class="pill-btn" onclick="openSnacks()">🍟 Snacks</button> 
     <button class="pill-btn" onclick="openOverlay('promoOverlay')">🔥 Promotions</button>
     <button class="pill-btn" onclick="openBestSellers()">⭐ Best Sellers</button> 
-    <button class="pill-btn" style="background:var(--orange); color:black;" onclick="openOverlay('wheelOverlay'); drawWheel();">🎡 Lucky Bite</button>
+    <button class="pill-btn" style="background:var(--orange); color:black;" onclick="openOverlay('wheelOverlay'); drawWheel(); startWheelTimer();">🎡 Lucky Bite</button>
   </div>
 </section>
 
@@ -468,6 +469,7 @@ function processPayment() {
 /* --- WHEEL LOGIC --- */
 const prizes = ["10% Off", "Free Soda", "5% Off", "Free Fries", "No Luck", "Free Cookie"];
 let currentRotation = 0;
+const COOLDOWN_MS = (23 * 60 * 60 * 1000) + (59 * 60 * 1000); // 23h 59m
 
 function drawWheel() {
     const canvas = document.getElementById('wheelCanvas');
@@ -491,14 +493,38 @@ function drawWheel() {
     });
 }
 
+function startWheelTimer() {
+    const display = document.getElementById('wheelCountdown');
+    const btn = document.getElementById('spinBtn');
+    
+    const tick = () => {
+        const lastSpin = localStorage.getItem('lastWheelSpin');
+        const now = new Date().getTime();
+        
+        if (lastSpin && now - lastSpin < COOLDOWN_MS) {
+            const remaining = COOLDOWN_MS - (now - lastSpin);
+            const h = Math.floor(remaining / 3600000);
+            const m = Math.floor((remaining % 3600000) / 60000);
+            const s = Math.floor((remaining % 60000) / 1000);
+            display.innerText = `Reviens dans: ${h}h ${m}m ${s}s`;
+            btn.disabled = true;
+            btn.style.opacity = "0.5";
+        } else {
+            display.innerText = "";
+            btn.disabled = false;
+            btn.style.opacity = "1";
+        }
+    };
+    
+    tick();
+    if(window.wTimer) clearInterval(window.wTimer);
+    window.wTimer = setInterval(tick, 1000);
+}
+
 function spinWheel() {
     const lastSpin = localStorage.getItem('lastWheelSpin');
     const now = new Date().getTime();
-    if (lastSpin && now - lastSpin < 86400000) {
-        const timeLeft = Math.ceil((86400000 - (now - lastSpin)) / 3600000);
-        alert("Vous avez déjà tourné la roue ! Revenez dans " + timeLeft + " heures.");
-        return;
-    }
+    if (lastSpin && now - lastSpin < COOLDOWN_MS) return;
 
     const wheel = document.getElementById('wheelCanvas');
     const btn = document.getElementById('spinBtn');
@@ -515,7 +541,8 @@ function spinWheel() {
 
     setTimeout(() => {
         localStorage.setItem('lastWheelSpin', new Date().getTime());
-        btn.disabled = false;
+        startWheelTimer();
+        
         const actualDeg = currentRotation % 360;
         const prizeIndex = Math.floor(((360 - actualDeg + 270) % 360) / (360 / prizes.length));
         const win = prizes[prizeIndex];
