@@ -124,7 +124,7 @@ body {
 .step-text { font-weight: bold; color: var(--blue); margin-top: 10px; display: block; text-align: center; }
 
 /* --- WHEEL STYLES --- */
-#wheelCanvas { border: 5px solid var(--orange); border-radius: 50%; background: white; }
+#wheelCanvas { border: 5px solid var(--orange); border-radius: 50%; background: white; transition: transform 4s cubic-bezier(0.1, 0, 0.2, 1); }
 .wheel-pointer { width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid red; position: absolute; top: 30px; left: 50%; transform: translateX(-50%); z-index: 10; }
 
 .pay-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
@@ -365,13 +365,13 @@ const data = {
 
 function openOverlay(id) { document.getElementById(id).classList.remove('hidden'); }
 function closeOverlay(id) { document.getElementById(id).classList.add('hidden'); }
-
 function toggleMidnight() { document.body.classList.toggle('midnight-mode'); }
 
-function showGreenMessage() {
+function showGreenMessage(msg) {
   const el = document.getElementById('greenAlert');
+  el.innerText = msg || "Votre Panier est vide !! Choisir un repas";
   el.style.display = 'block';
-  setTimeout(() => { el.style.display = 'none'; }, 3000);
+  setTimeout(() => { el.style.display = 'none'; }, 4000);
 }
 
 function clearCart() { cart = []; updateCartUI(); }
@@ -422,30 +422,25 @@ function openPayment() { if(cart.length === 0) showGreenMessage(); else openOver
 function processPayment() {
   closeOverlay('paymentOverlay');
   openOverlay('progressOverlay');
-  let steps = [
-    {p: 25, t: "Commande validée... 📝"},
-    {p: 50, t: "Le Chef prépare votre repas... 👨‍🍳"},
-    {p: 75, t: "Livreur en route vers vous... 🛵"},
-    {p: 100, t: "Arrivée imminente ! Profitez ! 😋"}
-  ];
+  let steps = [{p: 25, t: "Commande validée... 📝"}, {p: 50, t: "Le Chef prépare votre repas... 👨‍🍳"}, {p: 75, t: "Livreur en route vers vous... 🛵"}, {p: 100, t: "Arrivée imminente ! Profitez ! 😋"}];
   let current = 0;
   let interval = setInterval(() => {
     document.getElementById('pBar').style.width = steps[current].p + "%";
     document.getElementById('pText').innerText = steps[current].t;
     current++;
-    if(current === steps.length) {
-        clearInterval(interval);
-        setTimeout(() => alert("Transaction Réussie! Bon Appétit!"), 500);
-    }
+    if(current === steps.length) { clearInterval(interval); setTimeout(() => alert("Transaction Réussie! Bon Appétit!"), 500); }
   }, 2000);
 }
 
 /* --- WHEEL LOGIC --- */
 const prizes = ["-10% Off", "Free Soda", "-5% Off", "Free Fries", "No Luck", "Free Cookie"];
+let currentRotation = 0;
+
 function drawWheel() {
     const canvas = document.getElementById('wheelCanvas');
     const ctx = canvas.getContext('2d');
     const arc = (2 * Math.PI) / prizes.length;
+    ctx.clearRect(0,0,300,300);
     prizes.forEach((p, i) => {
         ctx.beginPath();
         ctx.fillStyle = i % 2 === 0 ? "#122a45" : "#ff8c1a";
@@ -456,17 +451,39 @@ function drawWheel() {
         ctx.fillStyle = "white";
         ctx.translate(150, 150);
         ctx.rotate(i * arc + arc / 2);
-        ctx.fillText(p, 70, 5);
+        ctx.textAlign = "right";
+        ctx.font = "bold 14px Arial";
+        ctx.fillText(p, 130, 5);
         ctx.restore();
     });
 }
 
 function spinWheel() {
     const wheel = document.getElementById('wheelCanvas');
-    const randomDeg = Math.floor(Math.random() * 360) + 1440;
-    wheel.style.transition = "transform 4s ease-out";
-    wheel.style.transform = `rotate(${randomDeg}deg)`;
-    setTimeout(() => { alert("Félicitations! Vous avez gagné un Bonus!"); }, 4100);
+    const btn = document.getElementById('spinBtn');
+    btn.disabled = true;
+    
+    // Fast, smooth rotation (5 to 10 full spins + random)
+    const extraSpins = (Math.floor(Math.random() * 5) + 5) * 360;
+    const randomStop = Math.floor(Math.random() * 360);
+    currentRotation += extraSpins + randomStop;
+    
+    wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+    setTimeout(() => {
+        btn.disabled = false;
+        // Calculate the winning index
+        // The pointer is at the top (270 degrees in canvas terms)
+        const actualDeg = currentRotation % 360;
+        const prizeIndex = Math.floor(((360 - actualDeg + 270) % 360) / (360 / prizes.length));
+        const win = prizes[prizeIndex];
+
+        if(win === "No Luck") {
+            showGreenMessage("Better luck next time ☹️");
+        } else {
+            showGreenMessage("You won " + win + " 😄");
+        }
+    }, 4000);
 }
 
 function updateTimers() {
