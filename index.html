@@ -468,7 +468,6 @@ function processPayment() {
 /* --- WHEEL LOGIC --- */
 const prizes = ["10% Off", "Free Soda", "5% Off", "Free Fries", "No Luck", "Free Cookie"];
 let currentRotation = 0;
-let wheelCooldown = false;
 
 function drawWheel() {
     const canvas = document.getElementById('wheelCanvas');
@@ -493,7 +492,13 @@ function drawWheel() {
 }
 
 function spinWheel() {
-    if (wheelCooldown) return;
+    const lastSpin = localStorage.getItem('lastWheelSpin');
+    const now = new Date().getTime();
+    if (lastSpin && now - lastSpin < 86400000) {
+        const timeLeft = Math.ceil((86400000 - (now - lastSpin)) / 3600000);
+        alert("Vous avez déjà tourné la roue ! Revenez dans " + timeLeft + " heures.");
+        return;
+    }
 
     const wheel = document.getElementById('wheelCanvas');
     const btn = document.getElementById('spinBtn');
@@ -509,6 +514,8 @@ function spinWheel() {
     setTimeout(() => clearInterval(soundInterval), 3500);
 
     setTimeout(() => {
+        localStorage.setItem('lastWheelSpin', new Date().getTime());
+        btn.disabled = false;
         const actualDeg = currentRotation % 360;
         const prizeIndex = Math.floor(((360 - actualDeg + 270) % 360) / (360 / prizes.length));
         const win = prizes[prizeIndex];
@@ -517,28 +524,17 @@ function spinWheel() {
             showGreenMessage("Better luck next time ☹️");
             playSound(200, 'square', 0.3);
         } else {
-            showGreenMessage("You won " + win + " 😄");
             playSound(600, 'triangle', 0.1); playSound(800, 'triangle', 0.2);
             
-            if(win.includes("5% Off")) applyDiscount(5);
-            else if(win.includes("10% Off")) applyDiscount(10);
-            else if(win.includes("Free")) addToCart(win, 0);
-        }
-        
-        // Start 5s Cooldown
-        wheelCooldown = true;
-        let count = 5;
-        const coolTimer = setInterval(() => {
-            btn.innerText = `Wait ${count}s...`;
-            count--;
-            if (count < 0) {
-                clearInterval(coolTimer);
-                wheelCooldown = false;
-                btn.disabled = false;
-                btn.innerText = "Lancer le Wheel!";
+            if(win.includes("Off")) {
+                showGreenMessage("You won " + win + " 😄");
+                applyDiscount(parseInt(win));
+            } else if(win.includes("Free")) {
+                const itemName = win.replace("Free ", "").toLowerCase();
+                showGreenMessage("A free " + itemName + " has been added to your cart 😄");
+                addToCart(win, 0);
             }
-        }, 1000);
-
+        }
     }, 4000);
 }
 
